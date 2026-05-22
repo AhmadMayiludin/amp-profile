@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AMP Pedia">
+  <defs>
+    <linearGradient id="blue" x1="34" x2="220" y1="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061a3f"/>
+      <stop offset=".48" stop-color="#0d47c8"/>
+      <stop offset="1" stop-color="#1684f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="52" fill="#fff"/>
+  <path fill="url(#blue)" d="M50 96c48-9 96-5 142 20-57-16-103-14-153 1l11-21Zm156 0c-48-9-96-5-142 20 57-16 103-14 153 1l-11-21ZM37 183l47-78h23l50 78h-27l-35-55-35 55H37Zm58 0h31l-15-28-16 28Zm68 0 28-58 30 43 22-33h13v48h-21v-21l-16 20-27-33-17 34h-12Z"/>
+  <rect x="116" y="61" width="24" height="24" rx="4" fill="#1684f7"/>
+  <rect x="149" y="76" width="28" height="21" rx="3" fill="#1684f7"/>
+  <rect x="96" y="81" width="14" height="14" rx="2" fill="#0d47c8"/>
+</svg>
