@@ -36,8 +36,7 @@ export default function Portfolio() {
                 <img
                   src={project.image}
                   alt={`${project.title} mockup`}
-                  className="hidden h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  onLoad={(event) => event.currentTarget.classList.remove('hidden')}
+                  className="relative z-10 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-6 rounded-3xl border border-white/70 bg-white/55 p-5 backdrop-blur-md">
                   <div className="h-4 w-28 rounded-full bg-electric/20" />
@@ -47,7 +46,7 @@ export default function Portfolio() {
                   </div>
                   <div className="mt-3 h-3 rounded-full bg-aqua/25" />
                 </div>
-                <span className="absolute left-5 top-5 rounded-full bg-navy px-3 py-1 text-xs font-black text-white">{project.service}</span>
+                <span className="absolute left-5 top-5 z-20 rounded-full bg-navy px-3 py-1 text-xs font-black text-white shadow-lg">{project.service}</span>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-black text-navy">{project.title}</h3>

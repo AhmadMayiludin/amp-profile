@@ -1,8 +1,8 @@
 export const partners = [
-  { name: 'Partner 01', logo: '/logos/partner-1.png' },
-  { name: 'Partner 02', logo: '/logos/partner-2.png' },
-  { name: 'Partner 03', logo: '/logos/partner-3.png' },
-  { name: 'Partner 04', logo: '/logos/partner-4.png' },
-  { name: 'Partner 05', logo: '/logos/partner-5.png' },
-  { name: 'Partner 06', logo: '/logos/partner-6.png' },
+  { name: 'Vercel Cloud', logo: '/logos/vercel.svg', category: 'Cloud Infrastructure' },
+  { name: 'Laravel Ecosystem', logo: '/logos/laravel.svg', category: 'Backend Framework' },
+  { name: 'Supabase DB', logo: '/logos/supabase.svg', category: 'Realtime Database' },
+  { name: 'Meta Developers', logo: '/logos/meta.svg', category: 'API Integration' },
+  { name: 'WhatsApp Business', logo: '/logos/whatsapp.svg', category: 'Communication & Bot' },
+  { name: 'Tailwind CSS', logo: '/logos/tailwindcss.svg', category: 'Modern UI Engine' },
 ];

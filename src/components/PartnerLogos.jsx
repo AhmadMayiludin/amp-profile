@@ -6,28 +6,31 @@ export default function PartnerLogos() {
     <section className="section-padding bg-white" aria-labelledby="partners-title">
       <div className="container-max">
         <SectionHeader
-          title="Trusted by teams, communities, and growing businesses"
-          subtitle="AMP Pedia siap menjadi partner teknologi untuk berbagai kebutuhan digital."
+          title="Infrastruktur & Ekosistem Teknologi Terpercaya"
+          subtitle="Aplikasi dan website yang kami bangun didukung oleh teknologi cloud dan framework standar industri global."
         />
         <div className="reveal grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner) => (
             <div
               key={partner.name}
-              className="group flex h-28 items-center justify-center rounded-3xl border border-slate-100 bg-slate-50/80 p-4 opacity-80 shadow-sm transition duration-300 hover:-translate-y-1 hover:bg-white hover:opacity-100 hover:shadow-premium"
+              className="group flex flex-col h-32 items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition duration-300 hover:-translate-y-1 hover:border-blue-100 hover:bg-white hover:shadow-premium"
             >
-              <img
-                src={partner.logo}
-                alt={`${partner.name} logo`}
-                className="hidden h-10 max-w-[130px] grayscale transition duration-300 group-hover:grayscale-0"
-                onLoad={(event) => event.currentTarget.classList.remove('hidden')}
-              />
-              <span className="text-sm font-black uppercase tracking-[0.18em] text-slate-400 transition group-hover:text-electric">
+              <div className="flex h-12 w-12 items-center justify-center mb-2">
+                <img
+                  src={partner.logo}
+                  alt={`${partner.name} logo`}
+                  className="h-8 w-8 object-contain transition duration-300 group-hover:scale-110"
+                />
+              </div>
+              <span className="text-xs font-bold text-navy text-center line-clamp-1">
                 {partner.name}
+              </span>
+              <span className="text-[10px] text-slate-400 font-medium text-center line-clamp-1">
+                {partner.category}
               </span>
             </div>
           ))}
         </div>
-        <p className="reveal mt-6 text-center text-sm text-slate-500">Logo dapat diganti sesuai partner atau client AMP Pedia.</p>
       </div>
     </section>
   );
