@@ -190,8 +190,11 @@ export default function Navbar({ onSelectApp, onSelectIndustry, onNavigateHome, 
             </button>
 
             {activeDropdown === 'apps' && (
-              <div className="absolute left-0 top-full mt-3 w-84 rounded-2xl border-2 border-[#191410] bg-[#FFFEFA] p-3 shadow-[6px_6px_0px_#191410] animate-in fade-in zoom-in-95 duration-150 z-50">
-                <div className="space-y-1">
+              <div className="absolute -left-12 top-full mt-3 w-[460px] rounded-2xl border-2 border-[#191410] bg-[#FFFEFA] p-4 shadow-[6px_6px_0px_#191410] animate-in fade-in zoom-in-95 duration-150 z-50">
+                <div className="mb-2 px-1 text-[11px] font-black uppercase tracking-wider text-[#665E55]">
+                  Layanan & Solusi Pembuatan Website / Aplikasi
+                </div>
+                <div className="grid grid-cols-2 gap-2">
                   {appsDropdown.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -199,14 +202,14 @@ export default function Navbar({ onSelectApp, onSelectIndustry, onNavigateHome, 
                         key={item.id}
                         type="button"
                         onClick={() => handleAppClick(item.id)}
-                        className="group flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition hover:bg-[#F5F0E3] cursor-pointer"
+                        className="group flex w-full items-start gap-2.5 rounded-xl p-2.5 text-left transition hover:bg-[#F5F0E3] cursor-pointer"
                       >
-                        <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-[#F5F0E3] text-[#191410] border border-[#191410] group-hover:bg-[#D97706] group-hover:text-white transition">
-                          <Icon size={17} />
+                        <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-[#F5F0E3] text-[#191410] border border-[#191410] group-hover:bg-[#D97706] group-hover:text-white transition">
+                          <Icon size={16} />
                         </div>
                         <div>
-                          <p className="text-xs font-black text-[#191410] group-hover:text-[#D97706]">{item.title}</p>
-                          <p className="mt-0.5 text-[11px] leading-snug text-[#665E55]">{item.desc}</p>
+                          <p className="text-xs font-black text-[#191410] group-hover:text-[#D97706] leading-snug">{item.title}</p>
+                          <p className="mt-1 text-[10px] leading-tight text-[#665E55]">{item.desc}</p>
                         </div>
                       </button>
                     );
@@ -282,8 +285,11 @@ export default function Navbar({ onSelectApp, onSelectIndustry, onNavigateHome, 
             </button>
 
             {activeDropdown === 'help' && (
-              <div className="absolute right-0 top-full mt-3 w-80 rounded-2xl border-2 border-[#191410] bg-[#FFFEFA] p-3 shadow-[6px_6px_0px_#191410] animate-in fade-in zoom-in-95 duration-150 z-50">
-                <div className="space-y-1">
+              <div className="absolute -right-8 top-full mt-3 w-[440px] rounded-2xl border-2 border-[#191410] bg-[#FFFEFA] p-4 shadow-[6px_6px_0px_#191410] animate-in fade-in zoom-in-95 duration-150 z-50">
+                <div className="mb-2 px-1 text-[11px] font-black uppercase tracking-wider text-[#665E55]">
+                  Pusat Bantuan, Alat & Kredibilitas
+                </div>
+                <div className="grid grid-cols-2 gap-2">
                   {helpDropdown.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -291,14 +297,14 @@ export default function Navbar({ onSelectApp, onSelectIndustry, onNavigateHome, 
                         key={item.title}
                         type="button"
                         onClick={() => handleSectionClick(item.section)}
-                        className="group flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition hover:bg-[#F5F0E3] cursor-pointer"
+                        className="group flex w-full items-start gap-2.5 rounded-xl p-2.5 text-left transition hover:bg-[#F5F0E3] cursor-pointer"
                       >
-                        <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-[#F5F0E3] text-[#191410] border border-[#191410] group-hover:bg-[#D97706] group-hover:text-white transition">
-                          <Icon size={16} />
+                        <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-[#F5F0E3] text-[#191410] border border-[#191410] group-hover:bg-[#D97706] group-hover:text-white transition">
+                          <Icon size={15} />
                         </div>
                         <div>
-                          <p className="text-xs font-black text-[#191410] group-hover:text-[#D97706]">{item.title}</p>
-                          <p className="mt-0.5 text-[11px] leading-snug text-[#665E55]">{item.desc}</p>
+                          <p className="text-xs font-black text-[#191410] group-hover:text-[#D97706] leading-snug">{item.title}</p>
+                          <p className="mt-1 text-[10px] leading-tight text-[#665E55]">{item.desc}</p>
                         </div>
                       </button>
                     );
