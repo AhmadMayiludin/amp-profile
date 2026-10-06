@@ -39,18 +39,28 @@ function Counter({ value, suffix }) {
 
 export default function Statistics() {
   return (
-    <section className="section-padding bg-gradient-to-br from-navy via-blue-950 to-violet-950 text-white dark-grid">
+    <section className="section-padding bg-[#191410] text-[#FFFEFA] border-y-2 border-[#191410]">
       <div className="container-max">
-        <div className="reveal mb-10 text-center">
-          <h2 className="text-3xl font-black sm:text-4xl lg:text-5xl">AMP Pedia in Numbers</h2>
+        <div className="mb-12 text-center">
+          <p className="text-xs font-black uppercase tracking-widest text-[#D97706]">Track Record & Kredibilitas</p>
+          <h2 className="mt-2 text-3xl font-black sm:text-4xl text-[#FFFEFA] tracking-tight">
+            AMP Pedia in Numbers
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-[#948A7D]">
+            Metrik nyata delivery aplikasi dan standar mutu pengerjaan kami untuk pelaku usaha.
+          </p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {stats.map((stat) => (
-            <article key={stat.label} className="reveal rounded-[1.5rem] border border-white/10 bg-white/10 p-6 text-center backdrop-blur">
-              <p className="text-4xl font-black text-white">
+            <article 
+              key={stat.label} 
+              className="rounded-2xl border-2 border-[#332A22] bg-[#241E18] p-6 text-center shadow-[4px_4px_0px_#000000] transition-all hover:border-[#D97706] hover:-translate-y-1"
+            >
+              <p className="text-3xl sm:text-4xl font-black text-[#D97706]">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-3 text-sm font-semibold leading-6 text-slate-300">{stat.label}</p>
+              <p className="mt-2 text-xs font-bold leading-snug text-[#EDE6D6]">{stat.label}</p>
             </article>
           ))}
         </div>
