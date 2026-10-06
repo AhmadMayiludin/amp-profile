@@ -18,7 +18,7 @@ import {
   HelpCircle,
   ShieldCheck,
   FileCode2,
-  Sparkles
+  Home
 } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
 
@@ -68,51 +68,51 @@ export function LogoKujang({ textDark = true }) {
 
 const appsDropdown = [
   {
+    id: 'web-landing',
     title: 'Website Bisnis & UMKM Kilat',
     desc: 'Landing page cepat 48 jam, mobile-friendly & SEO optimized.',
     icon: Laptop,
-    href: '#services',
   },
   {
+    id: 'web-app',
     title: 'Custom Web App & Sistem Informasi',
     desc: 'Sistem operasional multi-role berbasis Laravel & React.',
     icon: Database,
-    href: '#services',
   },
   {
+    id: 'pos-kasir',
     title: 'Kasir POS & Dashboard Admin',
     desc: 'Manajemen transaksi kasir thermal, stok gudang & audit laba.',
     icon: Store,
-    href: '#services',
   },
   {
+    id: 'wa-automation',
     title: 'WhatsApp Automation & CRM',
     desc: 'Bot notifikasi otomatis, reminder tagihan & broadcast pesan.',
     icon: Bot,
-    href: '#services',
   },
 ];
 
 const industriesDropdown = [
-  { name: 'F&B & Cafe / Resto', icon: Utensils, desc: 'Self-Order Barcode QRIS & Kitchen Display', href: '#industries' },
-  { name: 'Retail & Toko Grosir', icon: ShoppingBag, desc: 'Kasir Multi-Cabang & Multi-Gudang', href: '#industries' },
-  { name: 'Perusahaan & B2B', icon: Building2, desc: 'Quotation Portal & HRIS Absensi', href: '#industries' },
-  { name: 'Sekolah & Bimbel', icon: GraduationCap, desc: 'PPDB Online, CBT & Tagihan SPP', href: '#industries' },
-  { name: 'Bengkel & Servis', icon: Car, desc: 'Riwayat Servis & Reminder WhatsApp', href: '#industries' },
-  { name: 'Klinik & Dokter', icon: Stethoscope, desc: 'Rekam Medis Elektronik & Antrean', href: '#industries' },
+  { id: 'fnb', name: 'F&B & Cafe / Resto', icon: Utensils, desc: 'Self-Order Barcode QRIS & Kitchen Display' },
+  { id: 'retail', name: 'Retail & Toko Grosir', icon: ShoppingBag, desc: 'Kasir Multi-Cabang & Multi-Gudang' },
+  { id: 'corporate', name: 'Perusahaan & B2B', icon: Building2, desc: 'Quotation Portal & HRIS Absensi' },
+  { id: 'education', name: 'Sekolah & Bimbel', icon: GraduationCap, desc: 'PPDB Online, CBT & Tagihan SPP' },
+  { id: 'automotive', name: 'Bengkel & Servis', icon: Car, desc: 'Riwayat Servis & Reminder WhatsApp' },
+  { id: 'clinic', name: 'Klinik & Dokter', icon: Stethoscope, desc: 'Rekam Medis Elektronik & Antrean' },
 ];
 
 const helpDropdown = [
-  { title: 'Kalkulator Biaya Custom', desc: 'Simulasikan estimasi biaya sistem Anda seketika.', icon: Calculator, href: '#calculator' },
-  { title: 'Arsitektur & Keamanan', desc: 'Pelajari standar teknologi dan kepemilikan source code.', icon: ShieldCheck, href: '#architecture' },
-  { title: 'FAQ & Pertanyaan Umum', desc: 'Jawaban lengkap seputar garansi, revisi, dan server.', icon: HelpCircle, href: '#faq' },
-  { title: 'Portfolio Proyek', desc: 'Lihat studi kasus sistem dan live demo yang sudah dibuat.', icon: FileCode2, href: '#portfolio' },
+  { section: 'calculator', title: 'Kalkulator Biaya Custom', desc: 'Simulasikan estimasi biaya sistem Anda seketika.', icon: Calculator },
+  { section: 'architecture', title: 'Arsitektur & Keamanan', desc: 'Pelajari standar teknologi dan kepemilikan source code.', icon: ShieldCheck },
+  { section: 'faq', title: 'FAQ & Pertanyaan Umum', desc: 'Jawaban lengkap seputar garansi, revisi, dan server.', icon: HelpCircle },
+  { section: 'portfolio', title: 'Portfolio Proyek', desc: 'Lihat studi kasus sistem dan live demo yang sudah dibuat.', icon: FileCode2 },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onSelectApp, onSelectIndustry, onNavigateHome, onNavigateSection }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // 'apps' | 'industries' | 'help' | null
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -142,6 +142,21 @@ export default function Navbar() {
     setOpen(false);
   };
 
+  const handleAppClick = (appId) => {
+    closeDropdown();
+    onSelectApp(appId);
+  };
+
+  const handleIndustryClick = (indId) => {
+    closeDropdown();
+    onSelectIndustry(indId);
+  };
+
+  const handleSectionClick = (secId) => {
+    closeDropdown();
+    onNavigateSection(secId);
+  };
+
   const waUrl = createWhatsappUrl('Halo AMP Pedia Agency, saya ingin konsultasi seputar pembuatan sistem & aplikasi.');
 
   return (
@@ -152,13 +167,20 @@ export default function Navbar() {
       }`}
     >
       <div className="container-max flex h-20 items-center justify-between">
-        <a href="#home" onClick={closeDropdown} className="flex items-center">
+        <button
+          type="button"
+          onClick={() => {
+            closeDropdown();
+            onNavigateHome();
+          }}
+          className="flex items-center text-left focus:outline-none"
+        >
           <LogoKujang textDark={true} />
-        </a>
+        </button>
 
         {/* Desktop Omnia-Style Pill Navigation */}
         <nav className="hidden items-center gap-1.5 lg:flex">
-          {/* 1. Aplikasi Dropdown */}
+          {/* 1. Aplikasi Mega Menu */}
           <div className="relative">
             <button
               type="button"
@@ -177,11 +199,11 @@ export default function Navbar() {
                   {appsDropdown.map((item) => {
                     const Icon = item.icon;
                     return (
-                      <a
-                        key={item.title}
-                        href={item.href}
-                        onClick={closeDropdown}
-                        className="group flex items-start gap-3 rounded-xl p-2.5 transition hover:bg-stone-50"
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => handleAppClick(item.id)}
+                        className="group flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition hover:bg-stone-50"
                       >
                         <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
                           <Icon size={17} />
@@ -190,7 +212,7 @@ export default function Navbar() {
                           <p className="text-xs font-black text-stone-900 group-hover:text-amber-600">{item.title}</p>
                           <p className="mt-0.5 text-[11px] leading-snug text-stone-500">{item.desc}</p>
                         </div>
-                      </a>
+                      </button>
                     );
                   })}
                 </div>
@@ -198,7 +220,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* 2. Industri Dropdown */}
+          {/* 2. Industri Mega Menu */}
           <div className="relative">
             <button
               type="button"
@@ -220,11 +242,11 @@ export default function Navbar() {
                   {industriesDropdown.map((ind) => {
                     const Icon = ind.icon;
                     return (
-                      <a
-                        key={ind.name}
-                        href={ind.href}
-                        onClick={closeDropdown}
-                        className="group flex items-start gap-2.5 rounded-xl p-2.5 transition hover:bg-amber-50/60"
+                      <button
+                        key={ind.id}
+                        type="button"
+                        onClick={() => handleIndustryClick(ind.id)}
+                        className="group flex w-full items-start gap-2.5 rounded-xl p-2.5 text-left transition hover:bg-amber-50/60"
                       >
                         <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-stone-100 text-stone-700 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
                           <Icon size={15} />
@@ -233,7 +255,7 @@ export default function Navbar() {
                           <p className="text-xs font-bold text-stone-900 group-hover:text-amber-700 leading-none">{ind.name}</p>
                           <p className="mt-1 text-[10px] text-stone-500 leading-tight">{ind.desc}</p>
                         </div>
-                      </a>
+                      </button>
                     );
                   })}
                 </div>
@@ -242,13 +264,13 @@ export default function Navbar() {
           </div>
 
           {/* 3. Harga Direct Link */}
-          <a
-            href="#pricing"
-            onClick={closeDropdown}
+          <button
+            type="button"
+            onClick={() => handleSectionClick('pricing')}
             className="rounded-full px-4 py-2 text-xs font-black text-stone-700 transition hover:bg-stone-100"
           >
             Harga
-          </a>
+          </button>
 
           {/* 4. Bantuan Dropdown */}
           <div className="relative">
@@ -269,11 +291,11 @@ export default function Navbar() {
                   {helpDropdown.map((item) => {
                     const Icon = item.icon;
                     return (
-                      <a
+                      <button
                         key={item.title}
-                        href={item.href}
-                        onClick={closeDropdown}
-                        className="group flex items-start gap-3 rounded-xl p-2.5 transition hover:bg-stone-50"
+                        type="button"
+                        onClick={() => handleSectionClick(item.section)}
+                        className="group flex w-full items-start gap-3 rounded-xl p-2.5 text-left transition hover:bg-stone-50"
                       >
                         <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-stone-100 text-stone-700 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
                           <Icon size={16} />
@@ -282,7 +304,7 @@ export default function Navbar() {
                           <p className="text-xs font-black text-stone-900 group-hover:text-amber-600">{item.title}</p>
                           <p className="mt-0.5 text-[11px] leading-snug text-stone-500">{item.desc}</p>
                         </div>
-                      </a>
+                      </button>
                     );
                   })}
                 </div>
@@ -291,25 +313,25 @@ export default function Navbar() {
           </div>
 
           {/* 5. Tentang Kami Link */}
-          <a
-            href="#about"
-            onClick={closeDropdown}
+          <button
+            type="button"
+            onClick={() => handleSectionClick('about')}
             className="rounded-full px-4 py-2 text-xs font-black text-stone-700 transition hover:bg-stone-100"
           >
             Tentang
-          </a>
+          </button>
         </nav>
 
         {/* Right CTA */}
         <div className="hidden items-center gap-2.5 lg:flex">
-          <a
-            href="#calculator"
-            onClick={closeDropdown}
+          <button
+            type="button"
+            onClick={() => handleSectionClick('calculator')}
             className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-xs font-bold text-stone-800 transition hover:bg-stone-100"
           >
             <Calculator size={13} className="text-amber-500" />
             <span>Kalkulator</span>
-          </a>
+          </button>
           <a
             href={waUrl}
             target="_blank"
@@ -339,9 +361,14 @@ export default function Navbar() {
               <p className="text-[11px] font-black uppercase tracking-wider text-amber-600">Pilihan Aplikasi</p>
               <div className="mt-2 grid gap-1 pl-2">
                 {appsDropdown.map((app) => (
-                  <a key={app.title} href={app.href} onClick={closeDropdown} className="py-1 text-xs font-bold text-stone-700 hover:text-amber-600">
+                  <button
+                    key={app.id}
+                    type="button"
+                    onClick={() => handleAppClick(app.id)}
+                    className="text-left py-1 text-xs font-bold text-stone-700 hover:text-amber-600"
+                  >
                     • {app.title}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -350,34 +377,39 @@ export default function Navbar() {
               <p className="text-[11px] font-black uppercase tracking-wider text-amber-600">Sektor Industri</p>
               <div className="mt-2 grid grid-cols-2 gap-1 pl-2">
                 {industriesDropdown.map((ind) => (
-                  <a key={ind.name} href={ind.href} onClick={closeDropdown} className="py-1 text-xs font-bold text-stone-700 hover:text-amber-600">
+                  <button
+                    key={ind.id}
+                    type="button"
+                    onClick={() => handleIndustryClick(ind.id)}
+                    className="text-left py-1 text-xs font-bold text-stone-700 hover:text-amber-600"
+                  >
                     • {ind.name}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
 
             <div className="flex items-center justify-between border-t border-stone-100 pt-3">
-              <a href="#pricing" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+              <button type="button" onClick={() => handleSectionClick('pricing')} className="text-xs font-black text-stone-800">
                 Paket Harga
-              </a>
-              <a href="#about" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+              </button>
+              <button type="button" onClick={() => handleSectionClick('about')} className="text-xs font-black text-stone-800">
                 Tentang Kami
-              </a>
-              <a href="#faq" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+              </button>
+              <button type="button" onClick={() => handleSectionClick('faq')} className="text-xs font-black text-stone-800">
                 FAQ & Bantuan
-              </a>
+              </button>
             </div>
 
             <div className="pt-2 flex flex-col gap-2">
-              <a
-                href="#calculator"
-                onClick={closeDropdown}
+              <button
+                type="button"
+                onClick={() => handleSectionClick('calculator')}
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-200 bg-stone-50 py-3 text-xs font-bold text-stone-800"
               >
                 <Calculator size={15} className="text-amber-500" />
                 Simulasi di Kalkulator Biaya
-              </a>
+              </button>
               <a
                 href={waUrl}
                 target="_blank"
