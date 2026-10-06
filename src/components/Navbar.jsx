@@ -92,7 +92,7 @@ const appsDropdown = [
 const industriesDropdown = [
   { id: 'fnb', name: 'F&B & Cafe / Resto', icon: Utensils, desc: 'Self-Order Barcode QRIS & Kitchen Display' },
   { id: 'retail', name: 'Retail & Toko Grosir', icon: ShoppingBag, desc: 'Kasir Multi-Cabang & Multi-Gudang' },
-  { id: 'corporate', name: 'Perusahaan & B2B', icon: Building2, desc: 'Quotation Portal & HRIS Absensi' },
+  { id: 'corporate', name: 'B2B SaaS & Enterprise', icon: Building2, desc: 'Multi-Tenant, Recurring Billing & RBAC' },
   { id: 'education', name: 'Sekolah & Bimbel', icon: GraduationCap, desc: 'PPDB Online, CBT & Tagihan SPP' },
   { id: 'automotive', name: 'Bengkel & Servis', icon: Car, desc: 'Riwayat Servis & Reminder WhatsApp' },
   { id: 'clinic', name: 'Klinik & Dokter', icon: Stethoscope, desc: 'Rekam Medis Elektronik & Antrean' },
