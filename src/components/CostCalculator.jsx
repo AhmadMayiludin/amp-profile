@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Calculator, CheckCircle2, MessageCircle, ArrowRight, ShieldCheck, Sparkles, RefreshCw } from 'lucide-react';
+import { Calculator, CheckCircle2, MessageCircle, ArrowRight, ShieldCheck, Sparkles, RefreshCw, Loader2 } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
 import SectionHeader from './SectionHeader.jsx';
+import agencyApi from '../services/api.js';
 
 const baseModules = [
   { id: 'web-landing', name: 'Landing Page / Company Profile Interaktif', price: 350000, category: 'Frontend & UI' },
@@ -26,6 +27,7 @@ export default function CostCalculator() {
   const [selectedModules, setSelectedModules] = useState(['web-landing', 'payment-gateway']);
   const [selectedHosting, setSelectedHosting] = useState('cloud-basic');
   const [timeline, setTimeline] = useState('standard'); // 'express' or 'standard'
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const toggleModule = (id) => {
     setSelectedModules((prev) =>
@@ -46,9 +48,28 @@ export default function CostCalculator() {
   const formatRupiah = (val) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
 
-  const handleConsultation = () => {
+  const handleConsultation = async () => {
+    setIsSubmitting(true);
     const moduleNames = selectedModules.map((id) => baseModules.find((m) => m.id === id)?.name).filter(Boolean);
     const hostingName = hostingOptions.find((h) => h.id === selectedHosting)?.name;
+
+    // Asynchronously log & save estimation to Backend API without blocking user
+    try {
+      await agencyApi.saveEstimation({
+        modules: selectedModules,
+        module_names: moduleNames,
+        hosting: selectedHosting,
+        hosting_name: hostingName,
+        timeline,
+        total_estimate: finalTotal,
+        created_at: new Date().toISOString()
+      });
+    } catch (e) {
+      console.warn('[CostCalculator] Background backend sync:', e);
+    } finally {
+      setIsSubmitting(false);
+    }
+
     const text = `Halo AMP Pedia Studio, saya sudah menghitung estimasi sistem di Interactive Cost Calculator:\n\n*Modul Terpilih:*\n${moduleNames.map((n, i) => `${i + 1}. ${n}`).join('\n')}\n\n*Pilihan Server/Hosting:* ${hostingName}\n*Timeline:* ${timeline === 'express' ? 'Kilat (2-4 Hari)' : 'Standar (5-10 Hari)'}\n*Estimasi Total:* ${formatRupiah(finalTotal)}\n\nSaya ingin konsultasi lebih lanjut terkait project ini.`;
     window.open(createWhatsappUrl(text), '_blank', 'noopener,noreferrer');
   };
@@ -129,44 +150,51 @@ export default function CostCalculator() {
                       <input
                         type="radio"
                         name="hosting"
+                        value={opt.id}
                         checked={selectedHosting === opt.id}
                         onChange={() => setSelectedHosting(opt.id)}
                         className="size-4 accent-[#D97706] cursor-pointer"
                       />
-                      <p className="mt-2 text-xs font-black text-[#191410]">{opt.name}</p>
+                      <p className="mt-2 text-xs font-extrabold text-[#191410]">{opt.name}</p>
                     </div>
-                    <p className="mt-3 text-xs font-black text-[#D97706]">
-                      {opt.price === 0 ? 'Gratis / Standard' : `+${formatRupiah(opt.price)}`}
-                    </p>
+                    <span className="mt-3 text-xs font-black text-[#D97706]">
+                      {opt.price === 0 ? 'Gratis / Free' : `+${formatRupiah(opt.price)}`}
+                    </span>
                   </label>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Right: Live Summary & WhatsApp CTA */}
+          {/* Right: Summary Card */}
           <div className="lg:sticky lg:top-28 h-fit">
-            <div className="rounded-3xl border-2 border-[#191410] bg-[#FFFEFA] p-6 sm:p-8 shadow-[6px_6px_0px_#191410] relative overflow-hidden">
-              <div className="absolute top-0 right-0 rounded-bl-2xl bg-[#D97706] border-b-2 border-l-2 border-[#191410] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-white">
-                Live Calculator
+            <div className="rounded-3xl border-2 border-[#191410] bg-[#FFFEFA] p-6 sm:p-8 shadow-[6px_6px_0px_#191410]">
+              <div className="flex items-center justify-between border-b-2 border-[#191410] pb-4">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-xl border-2 border-[#191410] bg-[#F5F0E3] p-2 text-[#D97706] shadow-[2px_2px_0px_#191410]">
+                    <Calculator size={20} />
+                  </div>
+                  <h3 className="text-base font-black text-[#191410]">Ringkasan Estimasi</h3>
+                </div>
+                <span className="rounded-full border-2 border-[#191410] bg-[#D97706] px-2.5 py-0.5 text-[10px] font-black uppercase text-white shadow-[2px_2px_0px_#191410]">
+                  Live Calc
+                </span>
               </div>
 
-              <h4 className="text-xl font-black text-[#191410]">Ringkasan Estimasi</h4>
-              <p className="text-xs text-[#665E55] mt-1">Total rincian berdasarkan modul yang dipilih.</p>
-
-              <div className="mt-6 space-y-3 divide-y-2 divide-[#E5DFD3] border-y-2 border-[#191410] py-4 text-xs">
-                <div className="flex justify-between pt-2">
-                  <span className="text-[#665E55] font-semibold">Jumlah Modul Terpilih:</span>
-                  <span className="font-black text-[#191410]">{selectedModules.length} Modul</span>
+              <div className="mt-5 space-y-3 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-[#665E55] font-semibold">Total Modul Terpilih:</span>
+                  <span className="font-extrabold text-[#191410]">{selectedModules.length} Fitur</span>
                 </div>
-                <div className="flex justify-between pt-2">
-                  <span className="text-[#665E55] font-semibold">Biaya Fitur & Modul:</span>
-                  <span className="font-black text-[#191410]">{formatRupiah(modulesTotal)}</span>
+                <div className="flex justify-between">
+                  <span className="text-[#665E55] font-semibold">Subtotal Modul:</span>
+                  <span className="font-extrabold text-[#191410]">{formatRupiah(modulesTotal)}</span>
                 </div>
-                <div className="flex justify-between pt-2">
+                <div className="flex justify-between">
                   <span className="text-[#665E55] font-semibold">Infrastruktur Server:</span>
-                  <span className="font-black text-[#191410]">{formatRupiah(hostingPrice)}</span>
+                  <span className="font-extrabold text-[#191410]">{formatRupiah(hostingPrice)}</span>
                 </div>
+
                 <div className="flex items-center justify-between pt-2">
                   <span className="text-[#665E55] font-semibold">Kecepatan Pengerjaan:</span>
                   <select
@@ -193,9 +221,10 @@ export default function CostCalculator() {
               <button
                 type="button"
                 onClick={handleConsultation}
-                className="btn-primary mt-6 w-full justify-center py-4 text-xs font-black cursor-pointer text-white"
+                disabled={isSubmitting}
+                className="btn-primary mt-6 w-full justify-center py-4 text-xs font-black cursor-pointer text-white flex items-center gap-2"
               >
-                <MessageCircle size={18} />
+                {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <MessageCircle size={18} />}
                 Kunci Estimasi & Bawa ke WhatsApp
               </button>
 
