@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Calculator } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'Tentang Kami', href: '#about' },
+  { label: 'Solusi Industri', href: '#industries' },
   { label: 'Layanan', href: '#services' },
+  { label: 'Kalkulator Biaya', href: '#calculator' },
+  { label: 'Arsitektur', href: '#architecture' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Paket Harga', href: '#pricing' },
   { label: 'Kontak', href: '#contact' },
 ];
 
-export function LogoKujang({ className = "h-8 w-auto", textDark = true }) {
+export function LogoKujang({ textDark = true }) {
   return (
     <div className="flex items-center gap-3">
       {/* Kujang Emas Pasundan Symbol */}
@@ -48,7 +50,7 @@ export function LogoKujang({ className = "h-8 w-auto", textDark = true }) {
             AGENCY
           </span>
         </div>
-        <span className={`mt-0.5 text-[9px] font-bold tracking-widest uppercase ${textDark ? 'text-stone-400' : 'text-stone-400'}`}>
+        <span className="mt-0.5 text-[9px] font-bold tracking-widest uppercase text-stone-400">
           SOFTWARE HOUSE
         </span>
       </div>
@@ -79,7 +81,7 @@ export default function Navbar() {
           <LogoKujang textDark={true} />
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 xl:flex">
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -93,12 +95,19 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 sm:flex">
           <a
+            href="#calculator"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-xs font-bold text-stone-800 transition hover:bg-stone-100"
+          >
+            <Calculator size={14} className="text-amber-500" />
+            <span>Kalkulator</span>
+          </a>
+          <a
             href={waUrl}
             target="_blank"
             rel="noreferrer"
             className="btn-primary"
           >
-            <span>Konsultasi Gratis</span>
+            <span>Konsultasi Proyek</span>
             <ArrowRight size={14} />
           </a>
         </div>
@@ -106,7 +115,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="inline-flex size-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 lg:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 xl:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
@@ -114,28 +123,38 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-b border-stone-200 bg-white p-6 shadow-xl lg:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="border-b border-stone-200 bg-white p-6 shadow-xl xl:hidden">
+          <div className="flex flex-col gap-3">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="text-sm font-bold text-stone-700 transition hover:text-amber-600"
+                className="text-xs font-bold text-stone-700 py-1.5 transition hover:text-amber-600"
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setOpen(false)}
-              className="btn-primary mt-2 justify-center"
-            >
-              Konsultasi WhatsApp
-              <ArrowRight size={14} />
-            </a>
+            <div className="mt-3 pt-3 border-t border-stone-100 flex flex-col gap-2">
+              <a
+                href="#calculator"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-200 bg-stone-50 py-3 text-xs font-bold text-stone-800"
+              >
+                <Calculator size={15} className="text-amber-500" />
+                Hitung di Kalkulator Biaya
+              </a>
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="btn-primary justify-center"
+              >
+                Konsultasi WhatsApp
+                <ArrowRight size={14} />
+              </a>
+            </div>
           </div>
         </div>
       )}

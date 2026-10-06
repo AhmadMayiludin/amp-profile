@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import PartnerLogos from './components/PartnerLogos.jsx';
-import About from './components/About.jsx';
-import WhyChooseUs from './components/WhyChooseUs.jsx';
+import IndustrySolutions from './components/IndustrySolutions.jsx';
 import Services from './components/Services.jsx';
+import CostCalculator from './components/CostCalculator.jsx';
+import ProductArchitecture from './components/ProductArchitecture.jsx';
+import WhyChooseUs from './components/WhyChooseUs.jsx';
 import TechnologyStack from './components/TechnologyStack.jsx';
 import Portfolio from './components/Portfolio.jsx';
 import WorkProcess from './components/WorkProcess.jsx';
@@ -21,10 +23,9 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Splash Loading screen timer
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 900);
+    }, 750);
 
     const nodes = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
@@ -44,12 +45,11 @@ export default function App() {
       <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-white transition-opacity duration-500">
         <div className="relative mb-6">
           <div className="flex size-20 items-center justify-center rounded-3xl border border-stone-200 bg-amber-50 shadow-lg shadow-amber-500/10">
-            {/* Kujang Emblem Mini */}
             <svg viewBox="0 0 512 512" className="size-12">
               <defs>
                 <linearGradient id="loadGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FBBF24"/>
-                  <stop offset="100%" stop-color="#D97706"/>
+                  <stop offset="0%" stopColor="#FBBF24"/>
+                  <stop offset="100%" stopColor="#D97706"/>
                 </linearGradient>
               </defs>
               <g transform="scale(0.95) translate(10, 10)">
@@ -73,7 +73,6 @@ export default function App() {
           </p>
         </div>
 
-        {/* Minimalist dot bounce wave */}
         <div className="mt-6 flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '0ms' }} />
           <span className="size-2 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -90,9 +89,11 @@ export default function App() {
       <main>
         <Hero />
         <PartnerLogos />
-        <About />
-        <WhyChooseUs />
+        <IndustrySolutions />
         <Services />
+        <CostCalculator />
+        <ProductArchitecture />
+        <WhyChooseUs />
         <TechnologyStack />
         <Portfolio />
         <WorkProcess />
