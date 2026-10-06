@@ -1,5 +1,6 @@
 import { Github, Instagram, Linkedin, MessageCircle, Mail, MapPin } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
+import { LogoKujang } from './Navbar.jsx';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -28,7 +29,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center">
-              <img src="/logo-amp-pedia-horizontal.svg" alt="AMP Pedia" className="h-10 w-auto brightness-0 invert" />
+              <LogoKujang textDark={false} />
             </div>
             <p className="mt-5 text-xs leading-relaxed text-stone-400">
               AMP Pedia adalah software house dan studio digital terpercaya yang berfokus pada kecepatan pengerjaan, desain clean profesional, dan sistem siap pakai untuk akselerasi bisnis Anda.
