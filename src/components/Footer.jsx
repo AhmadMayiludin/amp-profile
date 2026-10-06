@@ -23,7 +23,7 @@ export default function Footer() {
             <h3 className="font-black">Contact</h3>
             <div className="mt-5 space-y-3 text-slate-300">
               <p>hello@amppedia.id</p>
-              <p>+62 812-3456-7890</p>
+              <p>+62 877-9267-3907</p>
               <p>Karawang, Indonesia</p>
             </div>
           </div>

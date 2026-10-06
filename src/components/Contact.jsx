@@ -61,7 +61,7 @@ export default function Contact() {
             <div className="mt-7 space-y-5">
               {[
                 [Mail, 'Email', 'hello@amppedia.id'],
-                [MessageCircle, 'WhatsApp', '+62 812-3456-7890'],
+                [MessageCircle, 'WhatsApp', '+62 877-9267-3907'],
                 [MapPin, 'Location', 'Karawang, Indonesia'],
                 [Timer, 'Working Hours', 'Monday - Friday, 09.00 - 17.00'],
               ].map(([Icon, label, value]) => (

@@ -5,9 +5,9 @@ import { createWhatsappUrl } from '../data/constants.js';
 import SectionHeader from './SectionHeader.jsx';
 
 export default function Portfolio() {
-  const [active, setActive] = useState('All');
+  const [active, setActive] = useState('Semua');
   const filtered = useMemo(
-    () => (active === 'All' ? portfolioItems : portfolioItems.filter((item) => item.category === active)),
+    () => (active === 'Semua' ? portfolioItems : portfolioItems.filter((item) => item.category === active)),
     [active],
   );
 

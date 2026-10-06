@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 const stats = [
-  { value: 10, suffix: '+', label: 'Digital Solutions Built' },
-  { value: 5, suffix: '+', label: 'Business Categories Served' },
-  { value: 100, suffix: '%', label: 'Responsive Design' },
-  { value: 24, suffix: '/7', label: 'Digital Accessibility' },
-  { value: 3, suffix: 'x', label: 'Fast & Scalable Development' },
+  { value: 15, suffix: '+', label: 'Solusi Digital Selesai' },
+  { value: 6, suffix: '+', label: 'Kategori Bisnis & UMKM' },
+  { value: 100, suffix: '%', label: 'Garansi & Source Code' },
+  { value: 24, suffix: '/7', label: 'Dukungan WhatsApp' },
+  { value: 48, suffix: ' Jam', label: 'Rata-rata Waktu Launching' },
 ];
 
 function Counter({ value, suffix }) {
