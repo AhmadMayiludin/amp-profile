@@ -54,27 +54,26 @@ export default function CostCalculator() {
   };
 
   return (
-    <section id="calculator" className="section-padding bg-stone-900 text-white relative overflow-hidden">
+    <section id="calculator" className="section-padding bg-[#F5F0E3] text-[#191410] relative overflow-hidden border-t-2 border-[#191410]">
       <div className="container-max relative z-10">
         <SectionHeader
           title="Simulasi & Kalkulator Biaya Custom"
           subtitle="Pilih modul aplikasi dan infrastruktur sesuai kebutuhan bisnis Anda. Dapatkan estimasi transparan seketika tanpa biaya tersembunyi."
-          dark={true}
         />
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.3fr_0.9fr]">
           {/* Left: Module Selection */}
           <div className="space-y-6">
-            <div className="rounded-3xl border border-stone-800 bg-stone-950/80 p-6 sm:p-8 backdrop-blur-md">
-              <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+            <div className="rounded-3xl border-2 border-[#191410] bg-[#FFFEFA] p-6 sm:p-8 shadow-[4px_4px_0px_#191410]">
+              <div className="flex items-center justify-between border-b-2 border-[#191410] pb-4">
                 <div>
-                  <h3 className="text-lg font-black text-white">1. Pilih Fitur & Modul Sistem</h3>
-                  <p className="text-xs text-stone-400">Centang fitur yang ingin dimasukkan ke dalam software Anda.</p>
+                  <h3 className="text-lg font-black text-[#191410]">1. Pilih Fitur & Modul Sistem</h3>
+                  <p className="text-xs text-[#665E55]">Centang fitur yang ingin dimasukkan ke dalam software Anda.</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setSelectedModules(['web-landing'])}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300"
+                  className="inline-flex items-center gap-1.5 rounded-lg border-2 border-[#191410] bg-[#F5F0E3] px-3 py-1.5 text-xs font-extrabold text-[#191410] shadow-[2px_2px_0px_#191410] hover:bg-[#D97706] hover:text-white transition cursor-pointer"
                 >
                   <RefreshCw size={12} /> Reset
                 </button>
@@ -86,24 +85,24 @@ export default function CostCalculator() {
                   return (
                     <label
                       key={module.id}
-                      className={`relative flex cursor-pointer flex-col justify-between rounded-2xl border p-4 transition-all ${
+                      className={`relative flex cursor-pointer flex-col justify-between rounded-2xl border-2 p-4 transition-all ${
                         isChecked
-                          ? 'border-amber-500 bg-amber-500/10 text-white shadow-lg shadow-amber-500/5 ring-1 ring-amber-500'
-                          : 'border-stone-800 bg-stone-900/60 text-stone-300 hover:border-stone-700 hover:bg-stone-900'
+                          ? 'border-[#191410] bg-[#F5F0E3] shadow-[3px_3px_0px_#D97706]'
+                          : 'border-[#E5DFD3] bg-[#FFFEFA] text-[#191410] hover:border-[#191410] hover:shadow-[2px_2px_0px_#191410]'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs font-bold leading-snug">{module.name}</span>
+                        <span className="text-xs font-extrabold leading-snug text-[#191410]">{module.name}</span>
                         <input
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleModule(module.id)}
-                          className="size-4 shrink-0 rounded border-stone-700 text-amber-500 accent-amber-500 focus:ring-amber-400"
+                          className="size-4 shrink-0 rounded border-2 border-[#191410] accent-[#D97706] cursor-pointer"
                         />
                       </div>
                       <div className="mt-3 flex items-center justify-between text-[11px]">
-                        <span className="text-stone-400">{module.category}</span>
-                        <span className="font-extrabold text-amber-400">+{formatRupiah(module.price)}</span>
+                        <span className="text-[#8C827A] font-semibold">{module.category}</span>
+                        <span className="font-black text-[#D97706]">+{formatRupiah(module.price)}</span>
                       </div>
                     </label>
                   );
@@ -112,18 +111,18 @@ export default function CostCalculator() {
             </div>
 
             {/* Hosting Infrastructure */}
-            <div className="rounded-3xl border border-stone-800 bg-stone-950/80 p-6 sm:p-8 backdrop-blur-md">
-              <h3 className="text-lg font-black text-white">2. Pilihan Infrastruktur & Server</h3>
-              <p className="text-xs text-stone-400 mt-1">Sesuaikan dengan target kapasitas dan skala operasional bisnis Anda.</p>
+            <div className="rounded-3xl border-2 border-[#191410] bg-[#FFFEFA] p-6 sm:p-8 shadow-[4px_4px_0px_#191410]">
+              <h3 className="text-lg font-black text-[#191410]">2. Pilihan Infrastruktur & Server</h3>
+              <p className="text-xs text-[#665E55] mt-1">Sesuaikan dengan target kapasitas dan skala operasional bisnis Anda.</p>
               
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {hostingOptions.map((opt) => (
                   <label
                     key={opt.id}
-                    className={`flex cursor-pointer flex-col justify-between rounded-2xl border p-4 transition ${
+                    className={`flex cursor-pointer flex-col justify-between rounded-2xl border-2 p-4 transition ${
                       selectedHosting === opt.id
-                        ? 'border-amber-500 bg-amber-500/10 ring-1 ring-amber-500'
-                        : 'border-stone-800 bg-stone-900/60 hover:border-stone-700'
+                        ? 'border-[#191410] bg-[#F5F0E3] shadow-[3px_3px_0px_#D97706]'
+                        : 'border-[#E5DFD3] bg-[#FFFEFA] hover:border-[#191410] hover:shadow-[2px_2px_0px_#191410]'
                     }`}
                   >
                     <div>
@@ -132,11 +131,11 @@ export default function CostCalculator() {
                         name="hosting"
                         checked={selectedHosting === opt.id}
                         onChange={() => setSelectedHosting(opt.id)}
-                        className="size-4 accent-amber-500"
+                        className="size-4 accent-[#D97706] cursor-pointer"
                       />
-                      <p className="mt-2 text-xs font-bold text-white">{opt.name}</p>
+                      <p className="mt-2 text-xs font-black text-[#191410]">{opt.name}</p>
                     </div>
-                    <p className="mt-3 text-xs font-extrabold text-amber-400">
+                    <p className="mt-3 text-xs font-black text-[#D97706]">
                       {opt.price === 0 ? 'Gratis / Standard' : `+${formatRupiah(opt.price)}`}
                     </p>
                   </label>
@@ -147,33 +146,33 @@ export default function CostCalculator() {
 
           {/* Right: Live Summary & WhatsApp CTA */}
           <div className="lg:sticky lg:top-28 h-fit">
-            <div className="rounded-3xl border-2 border-amber-500/50 bg-stone-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 rounded-bl-2xl bg-amber-500 px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-slate-950">
+            <div className="rounded-3xl border-2 border-[#191410] bg-[#FFFEFA] p-6 sm:p-8 shadow-[6px_6px_0px_#191410] relative overflow-hidden">
+              <div className="absolute top-0 right-0 rounded-bl-2xl bg-[#D97706] border-b-2 border-l-2 border-[#191410] px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-white">
                 Live Calculator
               </div>
 
-              <h4 className="text-xl font-black text-white">Ringkasan Estimasi</h4>
-              <p className="text-xs text-stone-400 mt-1">Total rincian berdasarkan modul yang dipilih.</p>
+              <h4 className="text-xl font-black text-[#191410]">Ringkasan Estimasi</h4>
+              <p className="text-xs text-[#665E55] mt-1">Total rincian berdasarkan modul yang dipilih.</p>
 
-              <div className="mt-6 space-y-3 divide-y divide-stone-800 border-y border-stone-800 py-4 text-xs">
+              <div className="mt-6 space-y-3 divide-y-2 divide-[#E5DFD3] border-y-2 border-[#191410] py-4 text-xs">
                 <div className="flex justify-between pt-2">
-                  <span className="text-stone-400">Jumlah Modul Terpilih:</span>
-                  <span className="font-bold text-white">{selectedModules.length} Modul</span>
+                  <span className="text-[#665E55] font-semibold">Jumlah Modul Terpilih:</span>
+                  <span className="font-black text-[#191410]">{selectedModules.length} Modul</span>
                 </div>
                 <div className="flex justify-between pt-2">
-                  <span className="text-stone-400">Biaya Fitur & Modul:</span>
-                  <span className="font-bold text-white">{formatRupiah(modulesTotal)}</span>
+                  <span className="text-[#665E55] font-semibold">Biaya Fitur & Modul:</span>
+                  <span className="font-black text-[#191410]">{formatRupiah(modulesTotal)}</span>
                 </div>
                 <div className="flex justify-between pt-2">
-                  <span className="text-stone-400">Infrastruktur Server:</span>
-                  <span className="font-bold text-white">{formatRupiah(hostingPrice)}</span>
+                  <span className="text-[#665E55] font-semibold">Infrastruktur Server:</span>
+                  <span className="font-black text-[#191410]">{formatRupiah(hostingPrice)}</span>
                 </div>
                 <div className="flex items-center justify-between pt-2">
-                  <span className="text-stone-400">Kecepatan Pengerjaan:</span>
+                  <span className="text-[#665E55] font-semibold">Kecepatan Pengerjaan:</span>
                   <select
                     value={timeline}
                     onChange={(e) => setTimeline(e.target.value)}
-                    className="rounded-lg border border-stone-700 bg-stone-900 px-2 py-1 text-xs font-bold text-amber-400 outline-none"
+                    className="rounded-lg border-2 border-[#191410] bg-[#F5F0E3] px-2 py-1 text-xs font-black text-[#191410] outline-none cursor-pointer"
                   >
                     <option value="standard">Standar (5-10 Hari)</option>
                     <option value="express">Express Kilat (2-4 Hari) +20%</option>
@@ -181,31 +180,31 @@ export default function CostCalculator() {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl bg-stone-900 p-5 border border-stone-800">
-                <p className="text-xs font-semibold uppercase tracking-wider text-amber-400">Estimasi Investasi Mulai</p>
+              <div className="mt-6 rounded-2xl bg-[#F5F0E3] p-5 border-2 border-[#191410]">
+                <p className="text-xs font-black uppercase tracking-wider text-[#D97706]">Estimasi Investasi Mulai</p>
                 <div className="mt-1 flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-white tracking-tight">{formatRupiah(finalTotal)}</span>
+                  <span className="text-3xl font-black text-[#191410] tracking-tight">{formatRupiah(finalTotal)}</span>
                 </div>
-                <p className="mt-2 text-[11px] text-stone-400 flex items-center gap-1.5">
-                  <ShieldCheck size={14} className="text-emerald-400 shrink-0" /> Termasuk Garansi, Free Konsultasi & Full Source Code
+                <p className="mt-2 text-[11px] text-[#665E55] font-bold flex items-center gap-1.5">
+                  <ShieldCheck size={14} className="text-[#D97706] shrink-0" /> Termasuk Garansi, Free Konsultasi & Full Source Code
                 </p>
               </div>
 
               <button
                 type="button"
                 onClick={handleConsultation}
-                className="btn-primary mt-6 w-full justify-center py-4 text-sm"
+                className="btn-primary mt-6 w-full justify-center py-4 text-xs font-black cursor-pointer text-white"
               >
                 <MessageCircle size={18} />
                 Kunci Estimasi & Bawa ke WhatsApp
               </button>
 
-              <div className="mt-5 space-y-2 text-[11px] text-stone-400">
+              <div className="mt-5 space-y-2 text-[11px] text-[#665E55] font-semibold">
                 <p className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-amber-400" /> Sistem dapat dicicil per milestone / termin
+                  <CheckCircle2 size={13} className="text-[#D97706]" /> Sistem dapat dicicil per milestone / termin
                 </p>
                 <p className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-amber-400" /> Live staging demo sebelum serah terima final
+                  <CheckCircle2 size={13} className="text-[#D97706]" /> Live staging demo sebelum serah terima final
                 </p>
               </div>
             </div>
