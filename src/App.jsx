@@ -45,48 +45,77 @@ export function AmpSymbolLoader({ className = "w-10 h-10" }) {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeDetail, setActiveDetail] = useState(null); // { type: 'industry' | 'app', data: {...} }
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 600);
+      setInitialLoading(false);
+    }, 450);
     return () => clearTimeout(timer);
   }, []);
+
+  // Smooth Page Transition Handler
+  const triggerTransition = (actionCallback) => {
+    setIsTransitioning(true);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => {
+      actionCallback();
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 200);
+    }, 280);
+  };
 
   const handleSelectApp = (appId) => {
     const appData = applicationPages[appId];
     if (appData) {
-      setActiveDetail({ type: 'app', data: appData });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      triggerTransition(() => {
+        setActiveDetail({ type: 'app', data: appData });
+      });
     }
   };
 
   const handleSelectIndustry = (indId) => {
     const indData = industryPages[indId];
     if (indData) {
-      setActiveDetail({ type: 'industry', data: indData });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      triggerTransition(() => {
+        setActiveDetail({ type: 'industry', data: indData });
+      });
     }
   };
 
   const handleNavigateHome = () => {
-    setActiveDetail(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (activeDetail) {
+      triggerTransition(() => {
+        setActiveDetail(null);
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleNavigateSection = (secId) => {
-    setActiveDetail(null);
-    setTimeout(() => {
+    if (activeDetail) {
+      triggerTransition(() => {
+        setActiveDetail(null);
+        setTimeout(() => {
+          const el = document.getElementById(secId);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      });
+    } else {
       const el = document.getElementById(secId);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 50);
+    }
   };
 
-  if (loading) {
+  if (initialLoading) {
     return (
       <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#F5F0E3]">
         <div className="flex flex-col items-center text-center">
@@ -114,7 +143,31 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F0E3] text-[#191410] selection:bg-[#D97706] selection:text-white font-sans antialiased">
+    <div className="min-h-screen bg-[#F5F0E3] text-[#191410] selection:bg-[#D97706] selection:text-white font-sans antialiased relative">
+      
+      {/* Smooth Page Switcher Loading Overlay */}
+      <div 
+        className={`fixed inset-0 z-[99998] flex items-center justify-center bg-[#F5F0E3]/90 backdrop-blur-sm transition-all duration-300 pointer-events-none ${
+          isTransitioning ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+      >
+        <div className="flex flex-col items-center text-center transform scale-95 transition-transform duration-300">
+          <div className="w-14 h-14 bg-[#FFFEFA] border-2 border-[#191410] rounded-2xl flex items-center justify-center p-2.5 mb-2.5 shadow-[4px_4px_0px_#191410] animate-pulse">
+            <AmpSymbolLoader className="w-full h-full" />
+          </div>
+          <div className="flex items-center justify-center gap-1.5 mt-2">
+            <span className="w-2 h-2 rounded-full bg-[#191410] animate-bounce" style={{ animationDuration: '0.6s', animationDelay: '0s' }}></span>
+            <span className="w-2 h-2 rounded-full bg-[#D97706] animate-bounce" style={{ animationDuration: '0.6s', animationDelay: '0.12s' }}></span>
+            <span className="w-2 h-2 rounded-full bg-[#F2721C] animate-bounce" style={{ animationDuration: '0.6s', animationDelay: '0.24s' }}></span>
+            <span className="w-2 h-2 rounded-full bg-[#D97706] animate-bounce" style={{ animationDuration: '0.6s', animationDelay: '0.36s' }}></span>
+            <span className="w-2 h-2 rounded-full bg-[#191410] animate-bounce" style={{ animationDuration: '0.6s', animationDelay: '0.48s' }}></span>
+          </div>
+          <p className="text-[10px] font-black tracking-widest uppercase text-[#191410] mt-3">
+            MEMUAT HALAMAN...
+          </p>
+        </div>
+      </div>
+
       <Navbar 
         onSelectApp={handleSelectApp}
         onSelectIndustry={handleSelectIndustry}
@@ -122,7 +175,7 @@ export default function App() {
         onNavigateSection={handleNavigateSection}
       />
       
-      <main>
+      <main className={`transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         {activeDetail ? (
           <DetailView 
             data={activeDetail.data} 
