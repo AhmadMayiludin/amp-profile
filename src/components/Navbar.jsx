@@ -1,22 +1,30 @@
-import { useEffect, useState } from 'react';
-import { Menu, X, ArrowRight, Calculator } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { 
+  Menu, 
+  X, 
+  ArrowRight, 
+  ChevronDown, 
+  Calculator,
+  Laptop, 
+  Store, 
+  Bot, 
+  Database, 
+  Utensils, 
+  ShoppingBag, 
+  Building2, 
+  GraduationCap, 
+  Car, 
+  Stethoscope,
+  HelpCircle,
+  ShieldCheck,
+  FileCode2,
+  Sparkles
+} from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Solusi Industri', href: '#industries' },
-  { label: 'Layanan', href: '#services' },
-  { label: 'Kalkulator Biaya', href: '#calculator' },
-  { label: 'Arsitektur', href: '#architecture' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Paket Harga', href: '#pricing' },
-  { label: 'Kontak', href: '#contact' },
-];
 
 export function LogoKujang({ textDark = true }) {
   return (
     <div className="flex items-center gap-3">
-      {/* Kujang Emas Pasundan Symbol */}
       <svg viewBox="0 0 512 512" className="h-9 w-9 shrink-0 drop-shadow-sm">
         <defs>
           <linearGradient id="kujangNavbarGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -58,97 +66,323 @@ export function LogoKujang({ textDark = true }) {
   );
 }
 
+const appsDropdown = [
+  {
+    title: 'Website Bisnis & UMKM Kilat',
+    desc: 'Landing page cepat 48 jam, mobile-friendly & SEO optimized.',
+    icon: Laptop,
+    href: '#services',
+  },
+  {
+    title: 'Custom Web App & Sistem Informasi',
+    desc: 'Sistem operasional multi-role berbasis Laravel & React.',
+    icon: Database,
+    href: '#services',
+  },
+  {
+    title: 'Kasir POS & Dashboard Admin',
+    desc: 'Manajemen transaksi kasir thermal, stok gudang & audit laba.',
+    icon: Store,
+    href: '#services',
+  },
+  {
+    title: 'WhatsApp Automation & CRM',
+    desc: 'Bot notifikasi otomatis, reminder tagihan & broadcast pesan.',
+    icon: Bot,
+    href: '#services',
+  },
+];
+
+const industriesDropdown = [
+  { name: 'F&B & Cafe / Resto', icon: Utensils, desc: 'Self-Order Barcode QRIS & Kitchen Display', href: '#industries' },
+  { name: 'Retail & Toko Grosir', icon: ShoppingBag, desc: 'Kasir Multi-Cabang & Multi-Gudang', href: '#industries' },
+  { name: 'Perusahaan & B2B', icon: Building2, desc: 'Quotation Portal & HRIS Absensi', href: '#industries' },
+  { name: 'Sekolah & Bimbel', icon: GraduationCap, desc: 'PPDB Online, CBT & Tagihan SPP', href: '#industries' },
+  { name: 'Bengkel & Servis', icon: Car, desc: 'Riwayat Servis & Reminder WhatsApp', href: '#industries' },
+  { name: 'Klinik & Dokter', icon: Stethoscope, desc: 'Rekam Medis Elektronik & Antrean', href: '#industries' },
+];
+
+const helpDropdown = [
+  { title: 'Kalkulator Biaya Custom', desc: 'Simulasikan estimasi biaya sistem Anda seketika.', icon: Calculator, href: '#calculator' },
+  { title: 'Arsitektur & Keamanan', desc: 'Pelajari standar teknologi dan kepemilikan source code.', icon: ShieldCheck, href: '#architecture' },
+  { title: 'FAQ & Pertanyaan Umum', desc: 'Jawaban lengkap seputar garansi, revisi, dan server.', icon: HelpCircle, href: '#faq' },
+  { title: 'Portfolio Proyek', desc: 'Lihat studi kasus sistem dan live demo yang sudah dibuat.', icon: FileCode2, href: '#portfolio' },
+];
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // 'apps' | 'industries' | 'help' | null
+  const navRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      setActiveDropdown(null);
+    };
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setActiveDropdown(null);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
-  const waUrl = createWhatsappUrl('Halo AMP Pedia Agency, saya ingin konsultasi seputar pembuatan sistem & website.');
+  const toggleDropdown = (menu) => {
+    setActiveDropdown((prev) => (prev === menu ? null : menu));
+  };
+
+  const closeDropdown = () => {
+    setActiveDropdown(null);
+    setOpen(false);
+  };
+
+  const waUrl = createWhatsappUrl('Halo AMP Pedia Agency, saya ingin konsultasi seputar pembuatan sistem & aplikasi.');
 
   return (
     <header
+      ref={navRef}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'border-b border-stone-200/80 bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white/80 backdrop-blur-sm'
+        scrolled ? 'border-b border-stone-200/80 bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white/90 backdrop-blur-sm'
       }`}
     >
       <div className="container-max flex h-20 items-center justify-between">
-        <a href="#home" className="flex items-center">
+        <a href="#home" onClick={closeDropdown} className="flex items-center">
           <LogoKujang textDark={true} />
         </a>
 
-        <nav className="hidden items-center gap-6 xl:flex">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-xs font-bold text-stone-600 transition hover:text-amber-600"
+        {/* Desktop Omnia-Style Pill Navigation */}
+        <nav className="hidden items-center gap-1.5 lg:flex">
+          {/* 1. Aplikasi Dropdown */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown('apps')}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-black transition ${
+                activeDropdown === 'apps' ? 'bg-stone-100 text-amber-600' : 'text-stone-700 hover:bg-stone-100'
+              }`}
             >
-              {item.label}
-            </a>
-          ))}
+              <span>Aplikasi</span>
+              <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'apps' ? 'rotate-180 text-amber-600' : 'text-stone-400'}`} />
+            </button>
+
+            {activeDropdown === 'apps' && (
+              <div className="absolute left-0 top-full mt-3 w-80 rounded-2xl border border-stone-200 bg-white p-3 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150">
+                <div className="space-y-1">
+                  {appsDropdown.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        onClick={closeDropdown}
+                        className="group flex items-start gap-3 rounded-xl p-2.5 transition hover:bg-stone-50"
+                      >
+                        <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
+                          <Icon size={17} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-black text-stone-900 group-hover:text-amber-600">{item.title}</p>
+                          <p className="mt-0.5 text-[11px] leading-snug text-stone-500">{item.desc}</p>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Industri Dropdown */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown('industries')}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-black transition ${
+                activeDropdown === 'industries' ? 'bg-stone-100 text-amber-600' : 'text-stone-700 hover:bg-stone-100'
+              }`}
+            >
+              <span>Industri</span>
+              <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'industries' ? 'rotate-180 text-amber-600' : 'text-stone-400'}`} />
+            </button>
+
+            {activeDropdown === 'industries' && (
+              <div className="absolute -left-20 top-full mt-3 w-[460px] rounded-2xl border border-stone-200 bg-white p-4 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150">
+                <div className="mb-2 px-1 text-[11px] font-black uppercase tracking-wider text-stone-400">
+                  Pilihan Solusi Sektor Bisnis
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {industriesDropdown.map((ind) => {
+                    const Icon = ind.icon;
+                    return (
+                      <a
+                        key={ind.name}
+                        href={ind.href}
+                        onClick={closeDropdown}
+                        className="group flex items-start gap-2.5 rounded-xl p-2.5 transition hover:bg-amber-50/60"
+                      >
+                        <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-stone-100 text-stone-700 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
+                          <Icon size={15} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-stone-900 group-hover:text-amber-700 leading-none">{ind.name}</p>
+                          <p className="mt-1 text-[10px] text-stone-500 leading-tight">{ind.desc}</p>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 3. Harga Direct Link */}
+          <a
+            href="#pricing"
+            onClick={closeDropdown}
+            className="rounded-full px-4 py-2 text-xs font-black text-stone-700 transition hover:bg-stone-100"
+          >
+            Harga
+          </a>
+
+          {/* 4. Bantuan Dropdown */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => toggleDropdown('help')}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-black transition ${
+                activeDropdown === 'help' ? 'bg-stone-100 text-amber-600' : 'text-stone-700 hover:bg-stone-100'
+              }`}
+            >
+              <span>Bantuan</span>
+              <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === 'help' ? 'rotate-180 text-amber-600' : 'text-stone-400'}`} />
+            </button>
+
+            {activeDropdown === 'help' && (
+              <div className="absolute right-0 top-full mt-3 w-80 rounded-2xl border border-stone-200 bg-white p-3 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150">
+                <div className="space-y-1">
+                  {helpDropdown.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        onClick={closeDropdown}
+                        className="group flex items-start gap-3 rounded-xl p-2.5 transition hover:bg-stone-50"
+                      >
+                        <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-stone-100 text-stone-700 group-hover:bg-amber-500 group-hover:text-slate-950 transition">
+                          <Icon size={16} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-black text-stone-900 group-hover:text-amber-600">{item.title}</p>
+                          <p className="mt-0.5 text-[11px] leading-snug text-stone-500">{item.desc}</p>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 5. Tentang Kami Link */}
+          <a
+            href="#about"
+            onClick={closeDropdown}
+            className="rounded-full px-4 py-2 text-xs font-black text-stone-700 transition hover:bg-stone-100"
+          >
+            Tentang
+          </a>
         </nav>
 
-        <div className="hidden items-center gap-3 sm:flex">
+        {/* Right CTA */}
+        <div className="hidden items-center gap-2.5 lg:flex">
           <a
             href="#calculator"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 px-3.5 py-2.5 text-xs font-bold text-stone-800 transition hover:bg-stone-100"
+            onClick={closeDropdown}
+            className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-xs font-bold text-stone-800 transition hover:bg-stone-100"
           >
-            <Calculator size={14} className="text-amber-500" />
+            <Calculator size={13} className="text-amber-500" />
             <span>Kalkulator</span>
           </a>
           <a
             href={waUrl}
             target="_blank"
             rel="noreferrer"
-            className="btn-primary"
+            className="rounded-full bg-amber-500 px-5 py-2.5 text-xs font-black text-slate-950 shadow-md shadow-amber-500/20 transition hover:bg-amber-400"
           >
-            <span>Konsultasi Proyek</span>
-            <ArrowRight size={14} />
+            Konsultasi Proyek
           </a>
         </div>
 
+        {/* Mobile Hamburger Button */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="inline-flex size-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 xl:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-stone-200 text-stone-700 transition hover:bg-stone-100 lg:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
+      {/* Mobile Accordion Menu */}
       {open && (
-        <div className="border-b border-stone-200 bg-white p-6 shadow-xl xl:hidden">
-          <div className="flex flex-col gap-3">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="text-xs font-bold text-stone-700 py-1.5 transition hover:text-amber-600"
-              >
-                {item.label}
+        <div className="max-h-[80vh] overflow-y-auto border-b border-stone-200 bg-white p-6 shadow-xl lg:hidden">
+          <div className="flex flex-col gap-4">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-wider text-amber-600">Pilihan Aplikasi</p>
+              <div className="mt-2 grid gap-1 pl-2">
+                {appsDropdown.map((app) => (
+                  <a key={app.title} href={app.href} onClick={closeDropdown} className="py-1 text-xs font-bold text-stone-700 hover:text-amber-600">
+                    • {app.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-wider text-amber-600">Sektor Industri</p>
+              <div className="mt-2 grid grid-cols-2 gap-1 pl-2">
+                {industriesDropdown.map((ind) => (
+                  <a key={ind.name} href={ind.href} onClick={closeDropdown} className="py-1 text-xs font-bold text-stone-700 hover:text-amber-600">
+                    • {ind.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between border-t border-stone-100 pt-3">
+              <a href="#pricing" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+                Paket Harga
               </a>
-            ))}
-            <div className="mt-3 pt-3 border-t border-stone-100 flex flex-col gap-2">
+              <a href="#about" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+                Tentang Kami
+              </a>
+              <a href="#faq" onClick={closeDropdown} className="text-xs font-black text-stone-800">
+                FAQ & Bantuan
+              </a>
+            </div>
+
+            <div className="pt-2 flex flex-col gap-2">
               <a
                 href="#calculator"
-                onClick={() => setOpen(false)}
+                onClick={closeDropdown}
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-200 bg-stone-50 py-3 text-xs font-bold text-stone-800"
               >
                 <Calculator size={15} className="text-amber-500" />
-                Hitung di Kalkulator Biaya
+                Simulasi di Kalkulator Biaya
               </a>
               <a
                 href={waUrl}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => setOpen(false)}
+                onClick={closeDropdown}
                 className="btn-primary justify-center"
               >
                 Konsultasi WhatsApp
