@@ -1,14 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AMP Pedia">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <title>AMP Pedia Favicon Emblem</title>
   <defs>
-    <linearGradient id="blue" x1="34" x2="220" y1="128" y2="128" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#061a3f"/>
-      <stop offset=".48" stop-color="#0d47c8"/>
-      <stop offset="1" stop-color="#1684f7"/>
+    <linearGradient id="gFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="sFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#221F1C"/>
+      <stop offset="100%" stop-color="#141210"/>
     </linearGradient>
   </defs>
-  <rect width="256" height="256" rx="52" fill="#fff"/>
-  <path fill="url(#blue)" d="M50 96c48-9 96-5 142 20-57-16-103-14-153 1l11-21Zm156 0c-48-9-96-5-142 20 57-16 103-14 153 1l-11-21ZM37 183l47-78h23l50 78h-27l-35-55-35 55H37Zm58 0h31l-15-28-16 28Zm68 0 28-58 30 43 22-33h13v48h-21v-21l-16 20-27-33-17 34h-12Z"/>
-  <rect x="116" y="61" width="24" height="24" rx="4" fill="#1684f7"/>
-  <rect x="149" y="76" width="28" height="21" rx="3" fill="#1684f7"/>
-  <rect x="96" y="81" width="14" height="14" rx="2" fill="#0d47c8"/>
+  <rect width="512" height="512" rx="112" fill="#FFFFFF" stroke="#EFECE6" stroke-width="8"/>
+  <g transform="translate(48, 32) scale(0.82)">
+    <path d="M 236 64 L 64 440 H 138 L 196 308 H 272 L 244 244 H 224 L 256 168 L 236 64 Z" fill="url(#sFav)" />
+    <path d="M 256 64 C 290 120 380 180 396 270 C 408 340 376 400 326 440 L 372 440 C 430 390 460 310 440 230 C 418 140 324 76 256 64 Z" fill="url(#gFav)" />
+    <path d="M 330 140 C 370 150 400 180 410 210 C 390 200 360 190 345 195 C 360 175 350 155 330 140 Z" fill="url(#gFav)" />
+    <path d="M 370 230 C 410 250 430 290 435 330 C 415 315 390 310 375 318 C 395 290 390 260 370 230 Z" fill="url(#gFav)" />
+    <path d="M 160 348 H 340 L 320 392 H 140 Z" fill="url(#sFav)" />
+    <circle cx="270" cy="180" r="12" fill="#F59E0B" />
+    <circle cx="295" cy="225" r="13" fill="#F59E0B" />
+    <circle cx="318" cy="275" r="14" fill="#F59E0B" />
+    <circle cx="335" cy="330" r="15" fill="#F59E0B" />
+  </g>
 </svg>

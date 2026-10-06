@@ -1,33 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140" role="img" aria-labelledby="title desc">
-  <title id="title">AMP Pedia</title>
-  <desc id="desc">Horizontal AMP Pedia logo with AMP letter mark, open book, and brand text.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
+  <title>AMP Pedia Agency - Kujang Emas Lockup</title>
   <defs>
-    <linearGradient id="blue" x1="0" x2="210" y1="70" y2="70" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#061a3f"/>
-      <stop offset=".48" stop-color="#0d47c8"/>
-      <stop offset="1" stop-color="#1684f7"/>
+    <linearGradient id="kujangGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
     </linearGradient>
-    <linearGradient id="word" x1="274" x2="548" y1="80" y2="80" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#07152f"/>
-      <stop offset=".38" stop-color="#07152f"/>
-      <stop offset=".42" stop-color="#1684f7"/>
-      <stop offset="1" stop-color="#1684f7"/>
+    <linearGradient id="kujangBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#221F1C"/>
+      <stop offset="100%" stop-color="#141210"/>
     </linearGradient>
   </defs>
-
-  <g fill="url(#blue)" transform="translate(0 10) scale(.27)">
-    <path d="M176 132c72 0 126 12 173 43 10 6 19 14 27 21-53-29-111-43-176-42H155l12-22h9Z"/>
-    <path d="M584 132c-72 0-126 12-173 43-10 6-19 14-27 21 53-29 111-43 176-42h45l-12-22h-9Z"/>
-    <path d="M145 183c78-15 156-10 230 32 19 11 34 13 52 0 74-42 152-47 230-32l14 32c-78-16-157-21-229 16-22 12-37 23-62 23s-40-11-62-23c-72-37-151-32-229-16l14-32h42Z"/>
-    <rect x="368" y="122" width="48" height="48" rx="6"/>
-    <rect x="424" y="88" width="44" height="34" rx="3"/>
-    <rect x="336" y="78" width="32" height="32" rx="2"/>
-    <rect x="304" y="112" width="18" height="18" rx="2"/>
-    <path d="M102 358 179 225h42l86 133h-46l-61-95-61 95h-37Z"/>
-    <path d="M201 358h54l-27-49-27 49Z"/>
-    <path d="M302 358 353 250l53 77 71-102h38v133h-41v-79l-65 82-58-78-40 75h-9Z"/>
-    <path d="M515 225h110c66 0 108 33 108 83 0 51-42 84-108 84h-44v-42h43c39 0 63-15 63-42s-24-41-63-41h-65v91h-44V225Z"/>
+  
+  <!-- Emblem Kujang Emas Pasundan -->
+  <g transform="translate(40, 40) scale(0.46875)">
+    <!-- Left Foundation Pillar -->
+    <path d="M 236 64 L 64 440 H 138 L 196 308 H 272 L 244 244 H 224 L 256 168 L 236 64 Z" fill="url(#kujangBase)" />
+    <!-- Right Kujang Dorsal Blade -->
+    <path d="M 256 64 C 290 120 380 180 396 270 C 408 340 376 400 326 440 L 372 440 C 430 390 460 310 440 230 C 418 140 324 76 256 64 Z" fill="url(#kujangGold)" />
+    <!-- Dorsal Siih 1 -->
+    <path d="M 330 140 C 370 150 400 180 410 210 C 390 200 360 190 345 195 C 360 175 350 155 330 140 Z" fill="url(#kujangGold)" />
+    <!-- Dorsal Siih 2 -->
+    <path d="M 370 230 C 410 250 430 290 435 330 C 415 315 390 310 375 318 C 395 290 390 260 370 230 Z" fill="url(#kujangGold)" />
+    <!-- Center Power Crossbar -->
+    <path d="M 160 348 H 340 L 320 392 H 140 Z" fill="url(#kujangBase)" />
+    <!-- 4 Mata Kujang -->
+    <circle cx="270" cy="180" r="10" fill="#F59E0B" />
+    <circle cx="295" cy="225" r="11" fill="#F59E0B" />
+    <circle cx="318" cy="275" r="12" fill="#F59E0B" />
+    <circle cx="335" cy="330" r="13" fill="#F59E0B" />
   </g>
 
-  <text x="222" y="91" fill="url(#word)" font-family="'Plus Jakarta Sans', Inter, Arial, sans-serif" font-size="60" font-weight="800">AMP Pedia</text>
+  <!-- Typography Wordmark -->
+  <g>
+    <text x="320" y="148" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="68" font-weight="900" letter-spacing="-0.02em" fill="#1A1814">AMP <tspan font-weight="800" fill="#D97706">PEDIA</tspan> <tspan font-size="44" font-weight="800" fill="#B45309">• AGENCY</tspan></text>
+    <text x="324" y="212" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="22" font-weight="700" letter-spacing="0.24em" fill="#78716C">SOFTWARE HOUSE & DIGITAL STUDIO</text>
+  </g>
 </svg>
