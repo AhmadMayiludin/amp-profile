@@ -15,6 +15,35 @@ import Footer from './components/Footer.jsx';
 import DetailView from './components/DetailView.jsx';
 import { industryPages, applicationPages } from './data/detailPages.js';
 
+export function AmpSymbolLoader({ className = "w-10 h-10" }) {
+  return (
+    <svg viewBox="0 0 512 512" className={className} xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="loadSymG1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FBBF24" />
+          <stop offset="50%" stopColor="#F59E0B" />
+          <stop offset="100%" stopColor="#D97706" />
+        </linearGradient>
+        <linearGradient id="loadSymS1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#1E293B" />
+          <stop offset="100%" stopColor="#0F172A" />
+        </linearGradient>
+      </defs>
+      <g transform="translate(40, 30) scale(0.85)">
+        <path d="M 236 64 L 64 440 H 138 L 196 308 H 272 L 244 244 H 224 L 256 168 L 236 64 Z" fill="url(#loadSymS1)" />
+        <path d="M 256 64 C 290 120 380 180 396 270 C 408 340 376 400 326 440 L 372 440 C 430 390 460 310 440 230 C 418 140 324 76 256 64 Z" fill="url(#loadSymG1)" />
+        <path d="M 330 140 C 370 150 400 180 410 210 C 390 200 360 190 345 195 C 360 175 350 155 330 140 Z" fill="url(#loadSymG1)" />
+        <path d="M 370 230 C 410 250 430 290 435 330 C 415 315 390 310 375 318 C 395 290 390 260 370 230 Z" fill="url(#loadSymG1)" />
+        <path d="M 160 348 H 340 L 320 392 H 140 Z" fill="url(#loadSymS1)" />
+        <circle cx="270" cy="180" r="10" fill="#D97706" />
+        <circle cx="295" cy="225" r="11" fill="#D97706" />
+        <circle cx="318" cy="275" r="12" fill="#D97706" />
+        <circle cx="335" cy="330" r="13" fill="#D97706" />
+      </g>
+    </svg>
+  );
+}
+
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [activeDetail, setActiveDetail] = useState(null); // { type: 'industry' | 'app', data: {...} }
@@ -22,7 +51,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 700);
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -59,33 +88,25 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white">
-        <div className="relative flex flex-col items-center">
-          <svg viewBox="0 0 512 512" className="h-16 w-16 animate-pulse drop-shadow-md">
-            <defs>
-              <linearGradient id="splashGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FBBF24" />
-                <stop offset="50%" stopColor="#F59E0B" />
-                <stop offset="100%" stopColor="#D97706" />
-              </linearGradient>
-            </defs>
-            <g transform="translate(40, 30) scale(0.85)">
-              <path d="M 236 64 L 64 440 H 138 L 196 308 H 272 L 244 244 H 224 L 256 168 L 236 64 Z" fill="#0F172A" />
-              <path d="M 256 64 C 290 120 380 180 396 270 C 408 340 376 400 326 440 L 372 440 C 430 390 460 310 440 230 C 418 140 324 76 256 64 Z" fill="url(#splashGold)" />
-              <circle cx="270" cy="180" r="12" fill="#F59E0B" />
-              <circle cx="295" cy="225" r="13" fill="#F59E0B" />
-              <circle cx="318" cy="275" r="14" fill="#F59E0B" />
-              <circle cx="335" cy="330" r="15" fill="#F59E0B" />
-            </g>
-          </svg>
-          <div className="mt-4 flex items-center gap-1.5">
-            <span className="text-base font-black tracking-tight text-stone-900">
-              AMP <span className="text-amber-500">PEDIA</span>
-            </span>
+      <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#F5F0E3]">
+        <div className="flex flex-col items-center text-center">
+          <div className="w-16 h-16 bg-[#FFFEFA] border-2 border-[#191410] rounded-2xl flex items-center justify-center p-3 mb-3 shadow-[4px_4px_0px_#191410]">
+            <AmpSymbolLoader className="w-full h-full" />
           </div>
-          <div className="mt-3 flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-amber-500 animate-ping" />
-            <span className="text-xs font-bold text-stone-400">Memuat ekosistem...</span>
+
+          <h2 className="font-extrabold text-2xl text-[#191410] tracking-tight">
+            AMP <span className="text-[#D97706]">PEDIA</span>
+          </h2>
+          <p className="text-[10px] font-bold tracking-widest uppercase text-[#8C827A] mt-0.5 mb-4">
+            AGENCY & SOFTWARE HOUSE
+          </p>
+
+          <div className="flex items-center justify-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#191410] animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0s' }}></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D97706] animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0.15s' }}></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F2721C] animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D97706] animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0.45s' }}></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#191410] animate-bounce" style={{ animationDuration: '0.8s', animationDelay: '0.6s' }}></span>
           </div>
         </div>
       </div>
@@ -93,7 +114,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-stone-900 selection:bg-amber-400 selection:text-slate-950 font-sans antialiased">
+    <div className="min-h-screen bg-[#F5F0E3] text-[#191410] selection:bg-[#D97706] selection:text-white font-sans antialiased">
       <Navbar 
         onSelectApp={handleSelectApp}
         onSelectIndustry={handleSelectIndustry}

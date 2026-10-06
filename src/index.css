@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +6,22 @@
 
 html {
   scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 body {
   margin: 0;
-  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
-  background: #FFFFFF;
-  color: #221F1C;
+  background-color: #F5F0E3;
+  /* Autentik AMP Pedia: Warm Paper Texture + Subtle Blueprint Micro-Grid */
+  background-image: 
+    radial-gradient(#d3cbbe 1.2px, transparent 1.2px), 
+    linear-gradient(to right, rgba(25, 20, 16, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 20, 16, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px, 64px 64px, 64px 64px;
+  background-position: 0 0, 0 0, 0 0;
+  color: #191410;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
@@ -31,33 +40,52 @@ textarea {
   @apply mx-auto max-w-7xl;
 }
 
-.gradient-text {
-  @apply bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 bg-clip-text text-transparent;
+/* AMP Pedia Tactile Components */
+.tactile-card {
+  background: #FFFEFA;
+  border: 2px solid #191410;
+  border-radius: 1.5rem;
+  box-shadow: 4px 4px 0px #191410;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tactile-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px #191410;
+}
+
+.tactile-pill {
+  border: 2px solid #191410;
+  box-shadow: 2px 2px 0px #191410;
+}
+
+.tactile-button {
+  background: #D97706;
+  color: #191410;
+  border: 2px solid #191410;
+  box-shadow: 3px 3px 0px #191410;
+  font-weight: 800;
+  transition: all 0.15s ease;
+}
+
+.tactile-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px #191410;
+  background: #F2721C;
+  color: #FFFFFF;
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-md transition duration-300 hover:-translate-y-0.5 hover:from-amber-600 hover:to-yellow-600 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-amber-200;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[#D97706] px-6 py-3.5 text-sm font-black text-[#191410] border-2 border-[#191410] shadow-[3px_3px_0px_#191410] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#F2721C] hover:text-white hover:shadow-[5px_5px_0px_#191410];
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3.5 text-sm font-bold text-stone-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-amber-400 hover:text-amber-700 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-amber-100;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#191410] bg-[#FFFEFA] px-6 py-3.5 text-sm font-black text-[#191410] shadow-[3px_3px_0px_#191410] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[#F5F0E3] hover:shadow-[5px_5px_0px_#191410];
 }
 
-.glass-card {
-  @apply border border-stone-100 bg-white shadow-sm backdrop-blur-xl;
-}
-
-/* Ensure all content is clearly visible without stuck opacity */
 .reveal {
   opacity: 1 !important;
   transform: none !important;
-}
-
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(212, 168, 56, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 168, 56, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
 }
 
 .no-scrollbar::-webkit-scrollbar {
