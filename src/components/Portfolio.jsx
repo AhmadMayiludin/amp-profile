@@ -12,17 +12,17 @@ export default function Portfolio() {
   );
 
   return (
-    <section id="portfolio" className="section-padding bg-gradient-to-b from-white to-slate-50">
+    <section id="portfolio" className="section-padding bg-white">
       <div className="container-max">
-        <SectionHeader title="Portfolio Project" subtitle="Project public dari GitHub Ahmad Mayiludin yang sudah dikurasi untuk ditampilkan sebagai karya AMP Pedia." />
-        <div className="reveal mb-8 flex flex-wrap justify-center gap-3">
+        <SectionHeader title="Karya & Portfolio Proyek" subtitle="Daftar proyek nyata dan produk live yang telah dikembangkan dan siap diimplementasikan untuk bisnis Anda." />
+        <div className="reveal mb-8 flex flex-wrap justify-center gap-2.5">
           {portfolioFilters.map((filter) => (
             <button
               key={filter}
               type="button"
               onClick={() => setActive(filter)}
-              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
-                active === filter ? 'bg-gradient-to-r from-electric to-aqua text-white shadow-glow' : 'bg-white text-slate-600 shadow-sm hover:text-electric'
+              className={`rounded-full px-5 py-2 text-xs font-bold transition ${
+                active === filter ? 'bg-amber-500 text-slate-950 shadow-md font-black' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
               }`}
             >
               {filter}
@@ -31,59 +31,57 @@ export default function Portfolio() {
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project) => (
-            <article key={project.title} className="reveal group overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-premium">
-              <div className="relative h-52 overflow-hidden bg-gradient-to-br from-blue-100 via-cyan-50 to-violet-100">
+            <article key={project.title} className="reveal group overflow-hidden rounded-3xl border border-stone-200/90 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-amber-400 hover:shadow-xl">
+              <div className="relative h-48 overflow-hidden bg-stone-100 border-b border-stone-100">
                 <img
                   src={project.image}
                   alt={`${project.title} mockup`}
                   className="relative z-10 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-6 rounded-3xl border border-white/70 bg-white/55 p-5 backdrop-blur-md">
-                  <div className="h-4 w-28 rounded-full bg-electric/20" />
-                  <div className="mt-5 grid grid-cols-3 gap-2">
-                    <div className="h-20 rounded-2xl bg-white/80" />
-                    <div className="col-span-2 h-20 rounded-2xl bg-white/80" />
-                  </div>
-                  <div className="mt-3 h-3 rounded-full bg-aqua/25" />
-                </div>
-                <span className="absolute left-5 top-5 z-20 rounded-full bg-navy px-3 py-1 text-xs font-black text-white shadow-lg">{project.service}</span>
+                <span className="absolute left-4 top-4 z-20 rounded-full bg-stone-900 px-3 py-1 text-[11px] font-bold text-amber-300 shadow-md">
+                  {project.service}
+                </span>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-black text-navy">{project.title}</h3>
-                <p className="mt-3 leading-7 text-slate-600">{project.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <h3 className="text-lg font-black text-stone-900 group-hover:text-amber-700 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-stone-600">{project.description}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {project.features.slice(0, 3).map((feature) => (
-                    <span key={feature} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                    <span key={feature} className="rounded-md bg-stone-100 px-2.5 py-1 text-[11px] font-semibold text-stone-700">
                       {feature}
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-wrap items-center gap-2 pt-4 border-t border-stone-100">
                   {project.demoUrl && (
                     <a
                       href={project.demoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-electric px-4 py-2 text-sm font-black text-white transition hover:bg-violet"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-amber-500 px-3.5 py-1.5 text-xs font-bold text-slate-950 transition hover:bg-amber-600"
                     >
-                      Live Demo <ExternalLink size={16} />
+                      Live Demo <ExternalLink size={13} />
                     </a>
                   )}
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-black text-slate-700 transition hover:border-electric hover:text-electric"
-                  >
-                    Source Code <Github size={16} />
-                  </a>
+                  {project.repoUrl && (
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-stone-300 px-3.5 py-1.5 text-xs font-bold text-stone-700 transition hover:border-stone-900 hover:text-stone-900"
+                    >
+                      Source Code <Github size={13} />
+                    </a>
+                  )}
                   <a
                     href={createWhatsappUrl(`Halo AMP Pedia, saya ingin diskusi tentang project ${project.title}.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black text-electric hover:text-violet"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-900 ml-auto"
                   >
-                    Diskusi Project <ArrowUpRight size={17} />
+                    Tanya Proyek <ArrowUpRight size={14} />
                   </a>
                 </div>
               </div>

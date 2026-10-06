@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Github, Instagram, Linkedin, Mail, MapPin, MessageCircle, Send, Timer, Video } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Send, Timer, ArrowRight } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
 import SectionHeader from './SectionHeader.jsx';
 
@@ -12,8 +12,8 @@ const initialForm = {
   message: '',
 };
 
-const services = ['Website Development', 'Mobile App Development', 'Sistem Informasi', 'UI/UX Design', 'AI Automation', 'IT Consultation'];
-const budgets = ['< Rp2 juta', 'Rp2 juta - Rp5 juta', 'Rp5 juta - Rp10 juta', '> Rp10 juta'];
+const services = ['Website Bisnis & UMKM', 'Sistem Informasi & Web App', 'Kasir POS & Dashboard Admin', 'WhatsApp CRM & Automation', 'Konsultasi IT & Custom'];
+const budgets = ['< Rp 1 Juta', 'Rp 1 Juta - Rp 3 Juta', 'Rp 3 Juta - Rp 7 Juta', '> Rp 7 Juta'];
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -47,75 +47,76 @@ export default function Contact() {
     }
 
     const text = `Halo AMP Pedia, saya ingin konsultasi project.\n\nNama: ${form.name}\nEmail: ${form.email}\nNomor WhatsApp: ${form.phone}\nJenis Layanan: ${form.service}\nBudget: ${form.budget}\nPesan: ${form.message}`;
-    setSuccess('Pesan berhasil disiapkan. Kamu akan diarahkan ke WhatsApp AMP Pedia.');
+    setSuccess('Pesan berhasil disiapkan! Mengalihkan ke WhatsApp AMP Pedia...');
     window.open(createWhatsappUrl(text), '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section id="contact" className="section-padding bg-slate-50">
+    <section id="contact" className="section-padding bg-stone-50/70">
       <div className="container-max">
-        <SectionHeader title="Hubungi AMP Pedia" subtitle="Diskusikan kebutuhan project kamu bersama kami." />
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <aside className="reveal rounded-[2rem] bg-navy p-7 text-white shadow-premium dark-grid">
-            <h3 className="text-2xl font-black">Informasi Kontak</h3>
-            <div className="mt-7 space-y-5">
-              {[
-                [Mail, 'Email', 'hello@amppedia.id'],
-                [MessageCircle, 'WhatsApp', '+62 877-9267-3907'],
-                [MapPin, 'Location', 'Karawang, Indonesia'],
-                [Timer, 'Working Hours', 'Monday - Friday, 09.00 - 17.00'],
-              ].map(([Icon, label, value]) => (
-                <div key={label} className="flex gap-4">
-                  <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white/10 text-cyan-200">
-                    <Icon size={20} />
+        <SectionHeader title="Konsultasi & Hubungi Kami" subtitle="Diskusikan rencana website, aplikasi, atau otomatisasi bisnis Anda bersama tim pengembang kami." />
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <aside className="reveal rounded-3xl bg-stone-900 p-8 text-white shadow-xl flex flex-col justify-between">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-amber-400 mb-4 border border-amber-500/30">
+                Direct Contact
+              </div>
+              <h3 className="text-2xl font-black text-white">Hubungi Tim Kami</h3>
+              <p className="mt-2 text-xs leading-relaxed text-stone-400">
+                Kami siap memberikan estimasi biaya transparan dan demo langsung untuk kebutuhan digital Anda.
+              </p>
+              <div className="mt-8 space-y-5">
+                {[
+                  [MessageCircle, 'WhatsApp Resmi', '+62 877-9267-3907'],
+                  [Mail, 'Email Support', 'hello@amppedia.id'],
+                  [MapPin, 'Lokasi', 'Karawang, Jawa Barat, Indonesia'],
+                  [Timer, 'Jam Pelayanan', 'Senin - Minggu (24 Jam Fast Response)'],
+                ].map(([Icon, label, value]) => (
+                  <div key={label} className="flex items-center gap-4">
+                    <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/10 text-amber-400">
+                      <Icon size={18} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-stone-400 uppercase tracking-wider font-semibold">{label}</p>
+                      <p className="text-sm font-bold text-white">{value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-slate-400">{label}</p>
-                    <p className="font-bold">{value}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="mt-8 flex gap-3">
-              {[Instagram, Linkedin, Github, Video].map((Icon, index) => (
-                <a
-                  key={index}
-                  href="#contact"
-                  className="grid size-11 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-cyan-400 hover:text-navy"
-                  aria-label={['Instagram', 'LinkedIn', 'GitHub', 'TikTok'][index]}
-                >
-                  <Icon size={19} />
-                </a>
-              ))}
+
+            <div className="mt-8 pt-6 border-t border-white/10">
+              <p className="text-xs text-stone-400">Punya project mendesak? Kami siap delivery dalam 24-48 jam.</p>
             </div>
           </aside>
 
-          <form onSubmit={handleSubmit} className="reveal rounded-[2rem] bg-white p-6 shadow-premium sm:p-8" noValidate>
-            {success && <div className="mb-5 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">{success}</div>}
-            <div className="grid gap-5 md:grid-cols-2">
+          <form onSubmit={handleSubmit} className="reveal rounded-3xl bg-white p-7 shadow-sm border border-stone-200/90 sm:p-8" noValidate>
+            {success && <div className="mb-5 rounded-2xl bg-emerald-50 px-4 py-3 text-xs font-bold text-emerald-800 border border-emerald-200">{success}</div>}
+            <div className="grid gap-4 md:grid-cols-2">
               <Field label="Nama Lengkap" name="name" value={form.name} error={errors.name} onChange={handleChange} />
-              <Field label="Email" name="email" type="email" value={form.email} error={errors.email} onChange={handleChange} />
-              <Field label="Nomor WhatsApp" name="phone" value={form.phone} error={errors.phone} onChange={handleChange} />
+              <Field label="Email Aktif" name="email" type="email" value={form.email} error={errors.email} onChange={handleChange} />
+              <Field label="Nomor WhatsApp" name="phone" value={form.phone} error={errors.phone} onChange={handleChange} placeholder="08..." />
               <Select label="Jenis Layanan" name="service" value={form.service} error={errors.service} onChange={handleChange} options={services} />
-              <Select label="Budget Project" name="budget" value={form.budget} error={errors.budget} onChange={handleChange} options={budgets} />
+              <Select label="Estimasi Budget" name="budget" value={form.budget} error={errors.budget} onChange={handleChange} options={budgets} />
               <div className="md:col-span-2">
-                <label htmlFor="message" className="mb-2 block text-sm font-black text-navy">
-                  Pesan / Kebutuhan Project
+                <label htmlFor="message" className="mb-1.5 block text-xs font-bold text-stone-800">
+                  Deskripsi Kebutuhan Project
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  rows="5"
-                  className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-electric focus:ring-4 focus:ring-blue-100"
+                  rows="4"
+                  placeholder="Ceritakan fitur apa yang ingin dibuat..."
+                  className="w-full rounded-xl border border-stone-200 px-3.5 py-2.5 text-xs text-stone-800 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
                 />
-                {errors.message && <p className="mt-2 text-sm font-semibold text-red-500">{errors.message}</p>}
+                {errors.message && <p className="mt-1 text-xs font-semibold text-rose-500">{errors.message}</p>}
               </div>
             </div>
             <button type="submit" className="btn-primary mt-6 w-full">
-              <Send size={18} />
-              Kirim Pesan via WhatsApp
+              <Send size={16} />
+              Kirim Pesan & Konsultasi via WhatsApp
             </button>
           </form>
         </div>
@@ -124,10 +125,10 @@ export default function Contact() {
   );
 }
 
-function Field({ label, name, value, onChange, error, type = 'text' }) {
+function Field({ label, name, type = 'text', value, error, onChange, placeholder = '' }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-sm font-black text-navy">
+      <label htmlFor={name} className="mb-1.5 block text-xs font-bold text-stone-800">
         {label}
       </label>
       <input
@@ -136,17 +137,18 @@ function Field({ label, name, value, onChange, error, type = 'text' }) {
         type={type}
         value={value}
         onChange={onChange}
-        className="w-full rounded-2xl border border-slate-200 px-4 py-3 outline-none transition focus:border-electric focus:ring-4 focus:ring-blue-100"
+        placeholder={placeholder}
+        className="w-full rounded-xl border border-stone-200 px-3.5 py-2.5 text-xs text-stone-800 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200"
       />
-      {error && <p className="mt-2 text-sm font-semibold text-red-500">{error}</p>}
+      {error && <p className="mt-1 text-xs font-semibold text-rose-500">{error}</p>}
     </div>
   );
 }
 
-function Select({ label, name, value, onChange, error, options }) {
+function Select({ label, name, value, error, onChange, options }) {
   return (
     <div>
-      <label htmlFor={name} className="mb-2 block text-sm font-black text-navy">
+      <label htmlFor={name} className="mb-1.5 block text-xs font-bold text-stone-800">
         {label}
       </label>
       <select
@@ -154,16 +156,16 @@ function Select({ label, name, value, onChange, error, options }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none transition focus:border-electric focus:ring-4 focus:ring-blue-100"
+        className="w-full rounded-xl border border-stone-200 px-3.5 py-2.5 text-xs text-stone-800 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-200 bg-white"
       >
-        <option value="">Pilih opsi</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+        <option value="">Pilih opsi...</option>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
           </option>
         ))}
       </select>
-      {error && <p className="mt-2 text-sm font-semibold text-red-500">{error}</p>}
+      {error && <p className="mt-1 text-xs font-semibold text-rose-500">{error}</p>}
     </div>
   );
 }

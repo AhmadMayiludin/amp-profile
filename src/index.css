@@ -11,7 +11,8 @@ html {
 body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
-  background: #ffffff;
+  background: #FFFFFF;
+  color: #221F1C;
 }
 
 button,
@@ -31,25 +32,25 @@ textarea {
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-electric via-aqua to-violet bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-600 bg-clip-text text-transparent;
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-electric to-aqua px-6 py-3 text-sm font-bold text-white shadow-glow transition duration-300 hover:-translate-y-1 hover:shadow-premium focus:outline-none focus:ring-4 focus:ring-cyan-200;
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-md transition duration-300 hover:-translate-y-0.5 hover:from-amber-600 hover:to-yellow-600 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-amber-200;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-ink shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:text-electric hover:shadow-premium focus:outline-none focus:ring-4 focus:ring-blue-100;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3.5 text-sm font-bold text-stone-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-amber-400 hover:text-amber-700 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-amber-100;
 }
 
 .glass-card {
-  @apply border border-white/40 bg-white/75 shadow-premium backdrop-blur-xl;
+  @apply border border-stone-100 bg-white shadow-sm backdrop-blur-xl;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .reveal.is-visible {
@@ -59,16 +60,9 @@ textarea {
 
 .grid-pattern {
   background-image:
-    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
-  background-size: 34px 34px;
-}
-
-.dark-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 38px 38px;
+    linear-gradient(rgba(212, 168, 56, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 168, 56, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .no-scrollbar::-webkit-scrollbar {

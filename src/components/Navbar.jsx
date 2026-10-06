@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { createWhatsappUrl } from '../data/constants.js';
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
+  { label: 'Tentang Kami', href: '#about' },
+  { label: 'Layanan', href: '#services' },
   { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Paket Harga', href: '#pricing' },
+  { label: 'Kontak', href: '#contact' },
 ];
 
 export default function Navbar() {
@@ -38,12 +38,12 @@ export default function Navbar() {
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'border-b border-white/30 bg-white/80 shadow-lg shadow-slate-900/5 backdrop-blur-xl' : 'bg-white/45 backdrop-blur-md'
+        scrolled ? 'border-b border-stone-200/80 bg-white/95 shadow-sm backdrop-blur-md' : 'bg-white/80 backdrop-blur-sm'
       }`}
     >
       <nav className="container-max flex h-20 items-center justify-between px-5 sm:px-8 lg:px-12" aria-label="Main navigation">
-        <a href="#home" className="flex items-center" aria-label="AMP Pedia home">
-          <img src="/logo-amp-pedia-horizontal.svg" alt="AMP Pedia" className="h-12 w-auto" />
+        <a href="#home" className="flex items-center gap-3" aria-label="AMP Pedia home">
+          <img src="/logo-amp-pedia-horizontal.svg" alt="AMP Pedia" className="h-10 w-auto" />
         </a>
 
         <div className="hidden items-center gap-8 lg:flex">
@@ -51,23 +51,23 @@ export default function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className={`group relative text-sm font-bold transition ${active === item.href.slice(1) ? 'text-electric' : 'text-slate-700 hover:text-electric'}`}
+              className={`group relative text-sm font-bold transition ${active === item.href.slice(1) ? 'text-amber-600' : 'text-stone-700 hover:text-amber-600'}`}
             >
               {item.label}
-              <span className={`absolute -bottom-2 left-0 h-0.5 rounded-full bg-gradient-to-r from-electric to-aqua transition-all ${active === item.href.slice(1) ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+              <span className={`absolute -bottom-2 left-0 h-0.5 rounded-full bg-amber-500 transition-all ${active === item.href.slice(1) ? 'w-full' : 'w-0 group-hover:w-full'}`} />
             </a>
           ))}
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
           <a className="btn-primary" href={ctaUrl} target="_blank" rel="noreferrer">
-            Konsultasi Gratis
+            Konsultasi Gratis <ArrowRight size={16} />
           </a>
         </div>
 
         <button
           type="button"
-          className="grid size-11 place-items-center rounded-full border border-slate-200 bg-white text-navy shadow-sm lg:hidden"
+          className="grid size-11 place-items-center rounded-full border border-stone-200 bg-white text-stone-900 shadow-sm lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? 'Tutup menu' : 'Buka menu'}
           aria-expanded={open}
@@ -77,14 +77,14 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-slate-100 bg-white/95 px-5 pb-5 shadow-xl backdrop-blur-xl lg:hidden">
+        <div className="border-t border-stone-100 bg-white px-5 pb-5 shadow-xl lg:hidden">
           <div className="container-max flex flex-col gap-2 pt-4">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`rounded-2xl px-4 py-3 text-sm font-bold ${active === item.href.slice(1) ? 'bg-blue-50 text-electric' : 'text-slate-700'}`}
+                className={`rounded-2xl px-4 py-3 text-sm font-bold ${active === item.href.slice(1) ? 'bg-amber-50 text-amber-700' : 'text-stone-700'}`}
               >
                 {item.label}
               </a>
