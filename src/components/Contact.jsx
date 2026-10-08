@@ -67,7 +67,7 @@ export default function Contact() {
               </p>
               <div className="mt-8 space-y-5">
                 {[
-                  [MessageCircle, 'WhatsApp Resmi', '+62 877-9267-3907'],
+                  [MessageCircle, 'WhatsApp Resmi', '+62 856-9435-2247'],
                   [Mail, 'Email Support', 'hello@amppedia.id'],
                   [MapPin, 'Lokasi', 'Karawang, Jawa Barat, Indonesia'],
                   [Timer, 'Jam Pelayanan', 'Senin - Minggu (24 Jam Fast Response)'],
